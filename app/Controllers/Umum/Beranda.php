@@ -48,7 +48,7 @@ class Beranda extends BaseController
             return redirect()->back()->withInput();
         }
     }
-    function editData($id)
+    function edituser($id)
     {
         $BerandaModel = new  BerandaModel();
         $data['ambilData'] = $BerandaModel->editData($id);
