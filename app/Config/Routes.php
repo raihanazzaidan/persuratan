@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/beranda', 'Umum\Beranda::index');
+$routes->get('/beranda', 'Umum\Beranda\Substaker::index');
 $routes->get('/beranda/adduser', 'Umum\Beranda::adduser');
 $routes->post('/beranda/adduser/prosesadduser', 'Umum\Beranda::prosesadduser');
 $routes->get('/beranda/edituser/(:any)', 'Umum\Beranda::edituser/$1');
