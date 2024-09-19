@@ -48,8 +48,8 @@
                                 <td><?= $u->user_nip; ?></td>
                                 <td><?= $u->status_user; ?></td>
                                 <td>
-                                    <a href='<?= base_url('/beranda/edit-data/' . $u->id); ?>' class="btn btn-primary">Edit</a>
-                                    <a href='<?= base_url('/beranda/hapus-data/' . $u->id); ?>' class="btn btn-danger">Hapus</a>
+                                    <a href='<?= base_url('/beranda/edituser/' . $u->id); ?>' class="btn btn-primary">Edit</a>
+                                    <a href='<?= base_url('/beranda/hapususer/' . $u->id); ?>' class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>

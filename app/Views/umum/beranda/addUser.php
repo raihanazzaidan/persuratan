@@ -24,12 +24,12 @@
             <h4 class="card-title">Add User</h4>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('/beranda/tambah-data/proses'); ?>" enctype="multipart/form-data" method="post">
+            <form action="<?= base_url('/beranda/adduser/prosesadduser'); ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama user" required>
+                            <label for="nama_lengkap">Nama</label>
+                            <input type="text" name="nama_lengkap" class="form-control" placeholder="Nama user" required>
                         </div>
                     </div>
 
@@ -42,15 +42,15 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="gender">Jenis Kelamin</label>
-                            <input type="text" name="gender" class="form-control" placeholder="Jenis Kelamin" required>
+                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                            <input type="text" name="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input type="text" name="nip" class="form-control" placeholder="NIP" required>
+                            <label for="user_nip">NIP</label>
+                            <input type="text" name="user_nip" class="form-control" placeholder="NIP" required>
                         </div>
                     </div>
 

@@ -8,6 +8,12 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Beranda extends BaseController
 {
+
+    public function __construct()
+    {
+        helper('form');  // Load helper form
+    }
+
     private $indukmodule = 'Sistem';
     private $submodule = 'Umum';
     private $title = 'Beranda';
@@ -34,49 +40,55 @@ class Beranda extends BaseController
     function prosesadduser()
     {
         $BerandaModel = new BerandaModel();
+        
+        // Ambil data dari form
         $data = [
-            'nama' => $this->request->getPost('nama'),
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'email' => $this->request->getPost('email'),
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'user_nip' => $this->request->getPost('user_nip'),
-            'status' => $this->request->getPost('status'),
+            'status_user' => $this->request->getPost('status_user'),
         ];
 
+        // Panggil fungsi adduser dari model
         if ($BerandaModel->adduser($data)) {
-            return redirect()->to(base_url('/beranda'));
+            return redirect()->to(base_url('/beranda'))->with('message', 'User berhasil ditambahkan');
         } else {
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan user');
         }
     }
     function edituser($id)
     {
         $BerandaModel = new  BerandaModel();
-        $data['ambilData'] = $BerandaModel->editData($id);
+        $data['getdata'] = $BerandaModel->edituser($id);
         $data['indukmodule'] = $this->indukmodule;
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
         $data['subtitle'] = 'Add';
-        $data['view'] = 'umum/beranda/editData';
+        $data['view'] = 'umum/beranda/edituser';
         return view('layout/template', $data);
     }
-    function prosesEditData($id)
+    function prosesedituser($id)
     {
         $BerandaModel = new BerandaModel();
         $data = [
-            'title' => $this->request->getPost('title'),
-            'author' => $this->request->getPost('author'),
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'email' => $this->request->getPost('email'),
+            'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
+            'user_nip' => $this->request->getPost('user_nip'),
+            'status_user' => $this->request->getPost('status_user'),
         ];
 
-        if ($BerandaModel->updateData($id, $data)) {
+        if ($BerandaModel->updateuser($id, $data)) {
             return redirect()->to(base_url('/beranda'));
         } else {
             return redirect()->back()->withInput();
         }
     }
-    function hapusData($id)
+    function hapususer($id)
     {
         $BerandaModel = new BerandaModel();
-        if ($BerandaModel->hapusData($id)) {
+        if ($BerandaModel->hapususer($id)) {
             return redirect()->to(base_url('/beranda'));
         } else {
             return redirect()->back()->withInput();
