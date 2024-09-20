@@ -16,8 +16,9 @@ class Beranda extends BaseController
 
     private $indukmodule = 'Sistem';
     private $submodule = 'Umum';
-    private $title = 'Beranda';
-    private $title2 = 'Tambah User';
+    private $title = 'User';
+    private $subtitle = 'Tambah User';
+    private $subtitle2 = 'Edit User';
 
     function index()
     {
@@ -32,8 +33,9 @@ class Beranda extends BaseController
     {
         $data['indukmodule'] = $this->indukmodule;
         $data['submodule'] = $this->submodule;
-        $data['title'] = $this->title2;
-        $data['subtitle'] = 'Add';
+        $data['title'] = $this->title;
+        $data['subtitle'] = $this->subtitle;
+        $data['subtitle2'] = $this->subtitle2;
         $data['view'] = 'umum/beranda/adduser';
         return view('layout/template', $data);
     }
@@ -65,6 +67,7 @@ class Beranda extends BaseController
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
         $data['subtitle'] = 'Add';
+        $data['subtitle2'] = $this->subtitle2;
         $data['view'] = 'umum/beranda/edituser';
         return view('layout/template', $data);
     }
@@ -80,7 +83,7 @@ class Beranda extends BaseController
         ];
 
         if ($BerandaModel->updateuser($id, $data)) {
-            return redirect()->to(base_url('/beranda'));
+            return redirect()->to(base_url('/'));
         } else {
             return redirect()->back()->withInput();
         }
@@ -89,7 +92,7 @@ class Beranda extends BaseController
     {
         $BerandaModel = new BerandaModel();
         if ($BerandaModel->hapususer($id)) {
-            return redirect()->to(base_url('/beranda'));
+            return redirect()->to(base_url('/'));
         } else {
             return redirect()->back()->withInput();
         }
