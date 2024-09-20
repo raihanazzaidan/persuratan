@@ -28,4 +28,4 @@ $routes->get('/jenis-induk-subsatker/addjenisinduksubsatker', 'Umum\JenisIndukSu
 $routes->post('/jenis-induk-subsatker/addjenisinduksubsatker/prosesaddjenisinduksubsatker', 'Umum\JenisIndukSubsatker::prosesAddJenisIndukSubsatker');
 $routes->get('/jenis-induk-subsatker/editjenisinduksubsatker/(:any)', 'Umum\JenisIndukSubsatker::editJenisIndukSubsatker/$1');
 $routes->post('/jenis-induk-subsatker/editjenisinduksubsatker/proseseditjenisinduksubsatker/(:any)', 'Umum\JenisIndukSubsatker::prosesEditJenisIndukSubsatker/$1');
-$routes->get('/subsatker/hapussubsatker/(:any)', 'Umum\Subsatker::hapusSubsatker/$1');
+$routes->get('/jenis-induk-subsatker/hapusjenisinduksubsatker/(:any)', 'Umum\JenisIndukSubsatker::hapusJenisIndukSubsatker/$1');

@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                     <a href='<?= base_url('/jenis-induk-subsatker/editjenisinduksubsatker/' . $jis->id); ?>' class="btn btn-primary">Edit</a>
-                                    <a href='<?= base_url('/subsatker/hapussubsatker/' . $jis->id); ?>' class="btn btn-danger">Hapus</a>
+                                    <a href='<?= base_url('/jenis-induk-subsatker/hapusjenisinduksubsatker/' . $jis->id); ?>' class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
