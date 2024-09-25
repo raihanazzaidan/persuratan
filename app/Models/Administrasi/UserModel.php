@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Umum;
+namespace App\Models\Administrasi;
 
 use CodeIgniter\Model;
 
-class BerandaModel extends Model
+class UserModel extends Model
 {
     function getData()
     {

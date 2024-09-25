@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3><?= $title; ?></h3>
-                    <a href='<?= base_url('/subsatker'); ?>' class="btn btn-primary">Kembali</a>
+                    <a href='<?= base_url('/administrasi/subsatker'); ?>' class="btn btn-primary">Kembali</a>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -24,7 +24,7 @@
                 <h4 class="card-title">Edit</h4>
             </div>
             <div class="card-body">
-                <form action="<?= base_url('/subsatker/editsubsatker/proseseditsubsatker/' . $data->id); ?>" enctype="multipart/form-data" method="post">
+                <form action="<?= base_url('/administrasi/subsatker/editsubsatker/proseseditsubsatker/' . $data->id); ?>" enctype="multipart/form-data" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -35,6 +35,7 @@
                                 <label for="nama_subsatker">Nama Subsatker</label>
                                 <input type="text" name="nama_subsatker" value="<?= htmlspecialchars($data->nama_subsatker); ?>" class="form-control">
                             </div>
+                            
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" class="form-select">

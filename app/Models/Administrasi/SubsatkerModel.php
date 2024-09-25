@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Subsatker;
+namespace App\Models\Administrasi;
 
 use CodeIgniter\Model;
 
@@ -8,9 +8,20 @@ class SubsatkerModel extends Model
 {
     function getSubsatker()
     {
-        $query = $this->db->query("SELECT * FROM subsatker AS s");
+        $query = $this->db->query("SELECT
+        s.*,
+        jis.nama AS nama_jenisinduksubsatker
+        FROM subsatker AS s
+        JOIN jenisinduksubsatker AS jis ON s.jenis_induk_subsatker = jis.id");
         return  $query->getResult();
     }
+
+    function ambil_jenisinduksubsatker()
+    {
+        $query = $this->db->query("SELECT * FROM jenisinduksubsatker AS jis WHERE jis.status = 1");
+        return  $query->getResult();
+    }
+
     function addSubsatker($data)
     {
         $db = \Config\Database::connect();

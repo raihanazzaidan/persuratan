@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Subsatker\JenisIndukSubsatker;
+namespace App\Models\Administrasi;
 
 use CodeIgniter\Model;
 

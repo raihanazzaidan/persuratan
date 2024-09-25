@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers\Umum;
+namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
-use App\Models\Umum\BerandaModel;
+use App\Models\Administrasi\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Beranda extends BaseController
+class User extends BaseController
 {
 
     public function __construct()
@@ -20,13 +20,13 @@ class Beranda extends BaseController
     private $subtitle = 'Tambah User';
     private $subtitle2 = 'Edit User';
 
-    function index()
+    function getuser()
     {
-        $model = new BerandaModel();
+        $model = new UserModel();
         $data['user'] = $model->getData();
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
-        $data['view'] = 'umum/beranda/index';
+        $data['view'] = 'administrasi/user/index';
         return view('layout/template', $data);
     }
     function adduser()
@@ -36,12 +36,12 @@ class Beranda extends BaseController
         $data['title'] = $this->title;
         $data['subtitle'] = $this->subtitle;
         $data['subtitle2'] = $this->subtitle2;
-        $data['view'] = 'umum/beranda/adduser';
+        $data['view'] = 'administrasi/user/adduser';
         return view('layout/template', $data);
     }
     function prosesadduser()
     {
-        $BerandaModel = new BerandaModel();
+        $BerandaModel = new UserModel();
         
         // Ambil data dari form
         $data = [
@@ -54,26 +54,26 @@ class Beranda extends BaseController
 
         // Panggil fungsi adduser dari model
         if ($BerandaModel->adduser($data)) {
-            return redirect()->to(base_url('/beranda'))->with('message', 'User berhasil ditambahkan');
+            return redirect()->to(base_url('/administrasi/user/'))->with('message', 'User berhasil ditambahkan');
         } else {
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan user');
         }
     }
     function edituser($id)
     {
-        $BerandaModel = new  BerandaModel();
+        $BerandaModel = new  UserModel();
         $data['getdata'] = $BerandaModel->edituser($id);
         $data['indukmodule'] = $this->indukmodule;
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
         $data['subtitle'] = 'Add';
         $data['subtitle2'] = $this->subtitle2;
-        $data['view'] = 'umum/beranda/edituser';
+        $data['view'] = 'administrasi/user/edituser';
         return view('layout/template', $data);
     }
     function prosesedituser($id)
     {
-        $BerandaModel = new BerandaModel();
+        $BerandaModel = new UserModel();
         $data = [
             'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'email' => $this->request->getPost('email'),
@@ -83,16 +83,16 @@ class Beranda extends BaseController
         ];
 
         if ($BerandaModel->updateuser($id, $data)) {
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/administrasi/user/'));
         } else {
             return redirect()->back()->withInput();
         }
     }
     function hapususer($id)
     {
-        $BerandaModel = new BerandaModel();
+        $BerandaModel = new UserModel();
         if ($BerandaModel->hapususer($id)) {
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/administrasi/user/'));
         } else {
             return redirect()->back()->withInput();
         }

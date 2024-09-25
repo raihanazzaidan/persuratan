@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Umum;
+namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
-use App\Models\Subsatker\JenisIndukSubsatker\JenisIndukSubsatkerModel;
+use App\Models\Administrasi\JenisIndukSubsatkerModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class JenisIndukSubsatker extends BaseController
@@ -20,7 +20,7 @@ class JenisIndukSubsatker extends BaseController
         $data['jenisinduksubsatker'] = $model->getJenisIndukSubsatker();
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
-        $data['view'] = 'umum/jenisinduksubsatker/jenisIndukSubsatker';
+        $data['view'] = 'administrasi/jenisinduksubsatker/index';
         return view('layout/template', $data);
     }
     function addJenisIndukSubsatker()
@@ -29,7 +29,7 @@ class JenisIndukSubsatker extends BaseController
         $data['title'] = $this->title;
         $data['submodule'] = $this->submodule;
         $data['subtitle'] = $this->subtitle;
-        $data['view'] = 'umum/jenisinduksubsatker/addJenisIndukSubsatker';
+        $data['view'] = 'administrasi/jenisinduksubsatker/addJenisIndukSubsatker';
         return view('layout/template', $data);
     }
     function prosesAddJenisIndukSubsatker()
@@ -41,7 +41,7 @@ class JenisIndukSubsatker extends BaseController
         ];
 
         if ($JenisIndukSubsatkerModel->addJenisIndukSubsatker($data)) {
-            return redirect()->to(base_url('/jenis-induk-subsatker'));
+            return redirect()->to(base_url('administrasi/jenis-induk-subsatker'));
         } else {
             return redirect()->back()->withInput();
         }
@@ -54,7 +54,7 @@ class JenisIndukSubsatker extends BaseController
         $data['submodule'] = $this->submodule;
         $data['title'] = $this->title;
         $data['subtitle2'] = $this->subtitle2;
-        $data['view'] = 'umum/jenisinduksubsatker/editJenisIndukSubsatker';
+        $data['view'] = 'administrasi/jenisinduksubsatker/editJenisIndukSubsatker';
         return view('layout/template', $data);
     }
     function prosesEditJenisIndukSubsatker($id)
@@ -66,7 +66,7 @@ class JenisIndukSubsatker extends BaseController
         ];
 
         if ($JenisIndukSubsatkerModel->updateJenisIndukSubsatker($id, $data)) {
-            return redirect()->to(base_url('/jenis-induk-subsatker'));
+            return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
         } else {
             return redirect()->back()->withInput();
         }
@@ -75,7 +75,7 @@ class JenisIndukSubsatker extends BaseController
     {
         $JenisIndukSubsatkerModel = new JenisIndukSubsatkerModel();
         if ($JenisIndukSubsatkerModel->hapusJenisIndukSubsatker($id)) {
-            return redirect()->to(base_url('/jenis-induk-subsatker'));
+            return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
         } else {
             return redirect()->back()->withInput();
         }
