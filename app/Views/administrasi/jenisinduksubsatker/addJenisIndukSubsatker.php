@@ -4,7 +4,7 @@
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
                 <!-- <p class="text-subtitle text-muted">Tambahkan user baru</p> -->
-                <a href='<?= base_url('/jenis-induk-subsatker'); ?>' class="btn btn-primary">Kembali</a>
+                <a href='<?= base_url('/administrasi/jenis-induk-subsatker'); ?>' class="btn btn-primary">Kembali</a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -25,12 +25,12 @@
             <h4 class="card-title">Tambah Jenis Induk Subsatker</h4>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('/jenis-induk-subsatker/addjenisinduksubsatker/prosesaddjenisinduksubsatker'); ?>" enctype="multipart/form-data" method="post">
+            <form action="<?= base_url('/administrasi/jenis-induk-subsatker/addjenisinduksubsatker/prosesaddjenisinduksubsatker'); ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nama">Nama Subsatker</label>
-                            <input type="nama" name="nama" class="form-control" placeholder="Nama Jenis Induk Subsatker" required>
+                            <input type="text" name="nama" class="form-control" placeholder="Nama Jenis Induk Subsatker" required>
                         </div>
                     </div>
                     <div class="col-md-6">

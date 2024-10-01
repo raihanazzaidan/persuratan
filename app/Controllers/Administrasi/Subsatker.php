@@ -53,7 +53,7 @@ class Subsatker extends BaseController
     function editSubsatker($id)
     {
         $SubsatkerModel = new SubsatkerModel();
-        // $data['jis'] = $SubsatkerModel->ambil_jenisinduksubsatker();
+        $data['jis'] = $SubsatkerModel->ambil_jenisinduksubsatker();
         $data['getSubsatker'] = $SubsatkerModel->editSubsatker($id);
         $data['indukmodule'] = $this->indukmodule;
         $data['submodule'] = $this->submodule;
@@ -61,6 +61,7 @@ class Subsatker extends BaseController
         $data['subtitle2'] = $this->subtitle2;
         $data['view'] = 'administrasi/subsatker/editSubsatker';
         return view('layout/template', $data);
+        // print_r($data['jis']);
     }
     function prosesEditSubsatker($id)
     {
@@ -68,7 +69,7 @@ class Subsatker extends BaseController
         $data = [
             'kode_subsatker' => $this->request->getPost('kode_subsatker'),
             'nama_subsatker' => $this->request->getPost('nama_subsatker'),
-            // 'jenis_induk_subsatker' => $this->request->getPost('jenis_induk_subsatker'),
+            'jenis_induk_subsatker' => $this->request->getPost('jenis_induk_subsatker'),
             'status' => $this->request->getPost('status'),
         ];
 

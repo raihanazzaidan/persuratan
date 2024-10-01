@@ -16,7 +16,7 @@ class TipeUser extends BaseController
     public function getTipeUser()
     {
         $TipeUserModel = new TipeUserModel();
-        $data['tipeuser'] = $TipeUserModel->gettipeuser();
+        $data['tipeuser'] = $TipeUserModel->getTipeUser();
         $data['indukmodule'] = $this->indukmodule;
         $data['title'] = $this->title;
         $data['view'] = 'administrasi/tipeuser/index';
@@ -24,7 +24,6 @@ class TipeUser extends BaseController
     }
     function addTipeUser()
     {
-        $TipeUserModel = new TipeUserModel();
         $data['indukmodule'] = $this->indukmodule;
         $data['title'] = $this->title;
         $data['subtitle'] = $this->subtitle;
@@ -39,8 +38,8 @@ class TipeUser extends BaseController
             'status' => $this->request->getPost('status'),
         ];
 
-        if ($TipeUserModel->addtipeuser($data)) {
-            return redirect()->to(base_url('administrasi/tipe-user'));
+        if ($TipeUserModel->addTipeUser($data)) {
+            return redirect()->to(base_url('/administrasi/tipe-user'));
         } else {
             return redirect()->back()->withInput();
         }
@@ -48,7 +47,7 @@ class TipeUser extends BaseController
     function editTipeUser($id)
     {
         $TipeUserModel = new TipeUserModel();
-        $data['getTipeUser'] = $TipeUserModel->edittipeuser($id);
+        $data['getTipeUser'] = $TipeUserModel->editTipeUser($id);
         $data['indukmodule'] = $this->indukmodule;
         $data['title'] = $this->title;
         $data['subtitle2'] = $this->subtitle2;
@@ -63,8 +62,8 @@ class TipeUser extends BaseController
             'status' => $this->request->getPost('status'),
         ];
 
-        if ($TipeUserModel->updatetipeuser($id, $data)) {
-            return redirect()->to(base_url('/administrasi/tipeuser'));
+        if ($TipeUserModel->updateTipeUser($id, $data)) {
+            return redirect()->to(base_url('/administrasi/tipe-user'));
         } else {
             return redirect()->back()->withInput();
         }
@@ -72,8 +71,8 @@ class TipeUser extends BaseController
     function hapusTipeUser($id)
     {
         $TipeUserModel = new TipeUserModel();
-        if ($TipeUserModel->hapustipeuser($id)) {
-            return redirect()->to(base_url('/administrasi/tipeuser'));
+        if ($TipeUserModel->hapusTipeUser($id)) {
+            return redirect()->to(base_url('/administrasi/tipe-user'));
         } else {
             return redirect()->back()->withInput();
         }

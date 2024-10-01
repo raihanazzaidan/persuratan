@@ -9,6 +9,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href='<?= base_url(''); ?>'><?= env('appname'); ?></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?= $modul; ?></li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $title; ?></li>
                     </ol>
                 </nav>
@@ -45,10 +46,25 @@
                                 <td><?= $u->email; ?></td>
                                 <td><?= $u->jenis_kelamin; ?></td>
                                 <td><?= $u->user_nip; ?></td>
-                                <td><?= $u->status_user; ?></td>
                                 <td>
-                                    <a href='<?= base_url('/administrasi/user/edituser/' . $u->id); ?>' class="btn btn-primary">Edit</a>
-                                    <a href='<?= base_url('/administrasi/user/hapususer/' . $u->id); ?>' class="btn btn-danger">Hapus</a>
+                                    <?php 
+                                        if($u->status_user == 'Y')
+                                        {
+                                            echo "Aktif";
+                                        }else if($u->status_user == 'N')
+                                        {
+                                            echo "Tidak Aktif";
+                                        }else
+                                        {
+                                            echo "";
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                    <a href='<?= base_url('/administrasi/user/edituser/' . $u->id); ?>' class="btn btn-primary">
+                                    <i class="bi bi-pencil-square"></i> Edit</a>
+                                    <a href='<?= base_url('/administrasi/user/hapususer/' . $u->id); ?>' class="btn btn-danger">
+                                    <i class="bi bi-trash-fill"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>

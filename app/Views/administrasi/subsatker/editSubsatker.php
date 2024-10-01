@@ -29,13 +29,26 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="kode_subsatker">Kode Subsatker</label>
-                                <input type="text" name="kode_subsatker" value="<?= htmlspecialchars($data->kode_subsatker); ?>" class="form-control">
+                                <input type="text" name="kode_subsatker" value="<?=($data->kode_subsatker); ?>" class="form-control">
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nama_subsatker">Nama Subsatker</label>
-                                <input type="text" name="nama_subsatker" value="<?= htmlspecialchars($data->nama_subsatker); ?>" class="form-control">
+                                <input type="text" name="nama_subsatker" value="<?=($data->nama_subsatker); ?>" class="form-control">
                             </div>
-                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Jenis Induk Subsatker</label>
+                                <select name="jenis_induk_subsatker" class="form-select">
+                                    <?php foreach ($jis as $value => $jis) { ?>
+                                        <option value="<?= $jis->id ?>" <?= $jis->id == $data->jenis_induk_subsatker ? 'selected':'' ?>><?= $jis->nama; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" class="form-select">
@@ -43,9 +56,9 @@
                                     <option value="1" <?= $data->status == '1' ? 'selected' : ''; ?>>Aktif</option>
                                 </select>
                             </div>
-                            <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
-                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
                         </div>
                     </div>
                 </form>

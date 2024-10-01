@@ -56,8 +56,10 @@
                                     <!-- <?= $tu->status == 1 ? 'Aktif':'Tidak Aktif' ?> -->
                                 </td>
                                 <td>
-                                    <a href='<?= base_url('/administrasi/tipe-user/edittipeuser/' . $tu->id); ?>' class="btn btn-primary">Edit</a>
-                                    <a href='<?= base_url('/administrasi/tipe-user/hapustipeuser/' . $tu->id); ?>' class="btn btn-danger">Hapus</a>
+                                    <a href='<?= base_url('/administrasi/tipe-user/edittipeuser/' . $tu->id); ?>' class="btn btn-primary">
+                                    <i class="bi bi-pencil-square"></i> Edit</a>
+                                    <a href='<?= base_url('/administrasi/tipe-user/hapustipeuser/' . $tu->id); ?>' class="btn btn-danger">
+                                    <i class="bi bi-trash-fill"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>

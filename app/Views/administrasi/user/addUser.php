@@ -9,6 +9,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href='<?= base_url(''); ?>'><?= env('appname'); ?></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?= $modul; ?></li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $title; ?></li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $subtitle; ?></li>
                     </ol>
@@ -26,7 +27,7 @@
         <div class="card-body">
             <form action="<?= base_url('/administrasi/user/adduser/prosesadduser/'); ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="nama_lengkap">Nama</label>
                             <input type="text" name="nama_lengkap" class="form-control" placeholder="Nama user" required>
@@ -42,8 +43,12 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <input type="text" name="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" required>
+                            <label for="">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" class="form-select">
+                                <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
                         </div>
                     </div>
 
@@ -53,18 +58,14 @@
                             <input type="text" name="user_nip" class="form-control" placeholder="NIP" required>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Status User</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status_user" id="statusY" value="Y" required>
-                                <label class="form-check-label" for="statusY">Y (Yes)</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status_user" id="statusN" value="N">
-                                <label class="form-check-label" for="statusN">N (No)</label>
-                            </div>
+                            <label for="">Status</label>
+                            <select name="status_user" class="form-select">
+                                <option value="" disabled selected>-- Status User --</option>
+                                <option value="Y">Aktif</option>
+                                <option value="N">Tidak Aktif</option>
+                            </select>
                         </div>
                     </div>
 

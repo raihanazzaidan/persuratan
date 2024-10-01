@@ -34,6 +34,9 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'filterSuperadmin'   => \App\Filters\FilterSuperadmin::class,
+        'filterAdmin'   => \App\Filters\FilterAdmin::class,
+        'filterPegawai'   => \App\Filters\FilterPegawai::class,
     ];
 
     /**
@@ -69,13 +72,26 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'filterSuperadmin' => [
+                'except' => ['/', '/callback-request-login']
+            ],
+            'filterAdmin' => [
+                'except' => ['/', '/callback-request-login']
+            ],
+            'filterPegawai' => [
+                'except' => ['/', '/callback-request-login']
+            ],
         ],
         'after' => [
-            // 'honeypot',
-            // 'secureheaders',
+            'filterSuperadmin' => [
+                'except' => ['/beranda', '/administrasi/*', '/surat/*']
+            ],
+            'filterAdmin' => [
+                'except' => ['/beranda', '/administrasi/user', '/administrasi/user/adduser', '/administrasi/user/adduser/prosesadduser', '/administrasi/user/edituser/(:any)', '/administrasi/user/edituser/prosesedituser/(:any)', '/administrasi/user/hapususer/(:any)', '/administrasi/jenis-induk-subsatker', '/administrasi/grup-jabatan', '/administrasi/jabatan', '/administrasi/subsatker', '/administrasi/user-role', '/administrasi/user-role/adduserrole', '/administrasi/user-role/adduserrole/pilih-user', '/administrasi/user-role/adduserrole/hapus-pilihan-user', '/administrasi/user-role/adduserrole/prosesadduserrole', '/administrasi/hak-akses', '/surat/*']
+            ],
+            'filterPegawai' => [
+                'except' => ['/beranda', '/administrasi/user', '/administrasi/jenis-induk-subsatker', '/administrasi/subsatker', '/administrasi/jabatan', '/administrasi/grup-jabatan', '/administrasi/user-role', ]
+            ],
         ],
     ];
 

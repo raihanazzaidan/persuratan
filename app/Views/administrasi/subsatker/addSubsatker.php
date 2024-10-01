@@ -44,6 +44,7 @@
                         <div class="form-group">
                             <label for="">Jenis Induk Subsatker</label>
                             <select name="jenis_induk_subsatker" class="form-select">
+                            <option value="" disabled selected>-- Pilih Jenis Induk Subsatker --</option>
                                 <?php foreach ($jis as $value => $jis) { ?>
                                     <option value="<?= $jis->id ?>"><?= $jis->nama; ?></option>
                                 <?php } ?>
@@ -54,6 +55,7 @@
                         <div class="form-group">
                             <label for="">Status</label>
                             <select name="status" class="form-select">
+                            <option value="" disabled selected>-- Status Subsatker --</option>
                                 <option value="0">Tidak Aktif</option>
                                 <option value="1">Aktif</option>
                             </select>

@@ -14,8 +14,7 @@ class User extends BaseController
         helper('form');  // Load helper form
     }
 
-    private $indukmodule = 'Sistem';
-    private $submodule = 'Umum';
+    private $modul = 'Administrasi';
     private $title = 'User';
     private $subtitle = 'Tambah User';
     private $subtitle2 = 'Edit User';
@@ -24,18 +23,16 @@ class User extends BaseController
     {
         $model = new UserModel();
         $data['user'] = $model->getData();
-        $data['submodule'] = $this->submodule;
+        $data['modul'] = $this->modul;
         $data['title'] = $this->title;
         $data['view'] = 'administrasi/user/index';
         return view('layout/template', $data);
     }
     function adduser()
     {
-        $data['indukmodule'] = $this->indukmodule;
-        $data['submodule'] = $this->submodule;
+        $data['modul'] = $this->modul;
         $data['title'] = $this->title;
         $data['subtitle'] = $this->subtitle;
-        $data['subtitle2'] = $this->subtitle2;
         $data['view'] = 'administrasi/user/adduser';
         return view('layout/template', $data);
     }
@@ -63,10 +60,8 @@ class User extends BaseController
     {
         $BerandaModel = new  UserModel();
         $data['getdata'] = $BerandaModel->edituser($id);
-        $data['indukmodule'] = $this->indukmodule;
-        $data['submodule'] = $this->submodule;
+        $data['modul'] = $this->modul;
         $data['title'] = $this->title;
-        $data['subtitle'] = 'Add';
         $data['subtitle2'] = $this->subtitle2;
         $data['view'] = 'administrasi/user/edituser';
         return view('layout/template', $data);
