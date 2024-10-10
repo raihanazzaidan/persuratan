@@ -4,6 +4,7 @@ namespace App\Controllers\Surat;
 
 use App\Controllers\BaseController;
 use App\Models\Surat\SifatNaskahModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class SifatNaskah extends BaseController
@@ -33,16 +34,30 @@ class SifatNaskah extends BaseController
     function prosesAddSifatNaskah()
     {
         $SifatNaskahModel = new SifatNaskahModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($SifatNaskahModel->addSifatNaskah($data)) {
-            return redirect()->to(base_url('/surat/sifat-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/sifat-naskah'));
     }
     function editSifatNaskah($id)
     {
@@ -63,18 +78,42 @@ class SifatNaskah extends BaseController
         ];
 
         if ($SifatNaskahModel->updateSifatNaskah($id, $data)) {
-            return redirect()->to(base_url('/surat/sifat-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/sifat-naskah'));
     }
     function hapusSifatNaskah($id)
     {
         $SifatNaskahModel = new SifatNaskahModel();
         if ($SifatNaskahModel->hapusSifatNaskah($id)) {
-            return redirect()->to(base_url('/surat/sifat-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/sifat-naskah'));
     }
 }

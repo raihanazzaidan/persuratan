@@ -5,3 +5,53 @@
 .table > tbody > tr > *{
     vertical-align: middle;
 }
+/* Tambahan CSS untuk sidebar profile */
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    background-color: #2c3e50;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.profile-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile-access {
+    font-size: 13px;
+    color: #bdc3c7;
+    margin-top: 4px;
+}
+
+.logout-button {
+    background-color: #e74c3c;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c0392b;
+}
+
+/* Akhiran Tambahan CSS */

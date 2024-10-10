@@ -106,3 +106,21 @@ $routes->post('/surat/registrasi-surat-masuk/addsuratmasuk/prosesaddsuratmasuk',
 $routes->get('/surat/registrasi-surat-masuk/editsuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::editSuratMasuk/$1');
 $routes->post('/surat/registrasi-surat-masuk/editsuratmasuk/proseseditsuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::prosesEditSuratMasuk/$1');
 $routes->get('/surat/registrasi-surat-masuk/hapussuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::hapusSuratMasuk/$1');
+
+// CRUD Registrasi Surat Masuk
+$routes->get('/surat/surat-masuk', 'Surat\SuratMasuk::getSuratMasuk');
+$routes->get('/surat/registrasi-surat-masuk/addsuratmasuk', 'Surat\RegistrasiSuratMasuk::addSuratMasuk');
+$routes->post('/surat/registrasi-surat-masuk/addsuratmasuk/prosesaddsuratmasuk', 'Surat\RegistrasiSuratMasuk::prosesAddSuratMasuk');
+$routes->get('/surat/registrasi-surat-masuk/editsuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::editSuratMasuk/$1');
+$routes->post('/surat/registrasi-surat-masuk/editsuratmasuk/proseseditsuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::prosesEditSuratMasuk/$1');
+$routes->get('/surat/registrasi-surat-masuk/hapussuratmasuk/(:any)', 'Surat\RegistrasiSuratMasuk::hapusSuratMasuk/$1');
+
+//CRUD Surat Keluar
+$routes->get('/surat/history-naskah-keluar', 'Surat\HistorySuratKeluar::getSuratKeluar');
+$routes->get('/surat/history-naskah-keluar/addsuratkeluar', 'Surat\HistorySuratKeluar::addSuratKeluar');
+$routes->post('/surat/history-naskah-keluar/addsuratkeluar/pilih-surat-masuk', 'Surat\HistorySuratKeluar::pilihSuratMasuk');
+$routes->get('/surat/history-naskah-keluar/addsuratkeluar/hapus-pilihan-surat-masuk', 'Surat\HistorySuratKeluar::hapus_session_pilihSuratMasuk');
+$routes->post('/surat/history-naskah-keluar/addsuratkeluar/prosesaddsuratkeluar', 'Surat\HistorySuratKeluar::prosesAddSuratKeluar');
+$routes->get('/surat/history-naskah-keluar/editsuratkeluar/(:any)', 'Surat\HistorySuratKeluar::editSuratKeluar/$1');
+$routes->post('/surat/history-naskah-keluar/editsuratkeluar/proseseditsuratkeluar/(:any)', 'Surat\HistorySuratKeluar::prosesEditSuratKeluar/$1');
+$routes->get('/surat/history-naskah-keluar/hapussuratkeluar/(:any)', 'Surat\HistorySuratKeluar::hapusSuratKeluar/$1');

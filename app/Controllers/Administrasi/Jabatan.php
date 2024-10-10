@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use App\Models\Administrasi\JabatanModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Jabatan extends BaseController
@@ -35,17 +36,31 @@ class Jabatan extends BaseController
     function prosesAddJabatan()
     {
         $JabatanModel = new JabatanModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'subsatker_id' => $this->request->getPost('subsatker_id'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($JabatanModel->addJabatan($data)) {
-            return redirect()->to(base_url('/administrasi/jabatan'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to('/administrasi/jabatan');
     }
     function editJabatan($id)
     {
@@ -68,18 +83,42 @@ class Jabatan extends BaseController
         ];
 
         if ($JabatanModel->updateJabatan($id, $data)) {
-            return redirect()->to(base_url('/administrasi/subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to('/administrasi/jabatan');
     }
     function hapusJabatan($id)
     {
         $JabatanModel = new JabatanModel();
         if ($JabatanModel->hapusJabatan($id)) {
-            return redirect()->to(base_url('/administrasi/jabatan'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/jabatan'));
     }
 }

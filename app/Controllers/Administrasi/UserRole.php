@@ -50,6 +50,13 @@ class UserRole extends BaseController
             'email_user' => $ambildataUser[0]->email
         ];
         session()->set($data);
+        $sessFlashdata = [
+            'sweetAlert' => [
+                'message' => 'Berhasil memilih user',
+                'icon' => 'success',
+            ],
+        ];
+        session()->setFlashdata($sessFlashdata);
         return redirect()->to('administrasi/user-role/adduserrole/');
     }
 
@@ -57,6 +64,13 @@ class UserRole extends BaseController
     {
         $session = session();
         $session->remove(['id_user', 'nama_user', 'email_user']);
+        $sessFlashdata = [
+            'sweetAlert' => [
+                'message' => 'Berhasil membatalkan pilih user',
+                'icon' => 'success',
+            ],
+        ];
+        session()->setFlashdata($sessFlashdata);
         return redirect()->to('administrasi/user-role/adduserrole');
     }
 
@@ -73,11 +87,23 @@ class UserRole extends BaseController
         ];
         if ($UserRoleModel->addUserRole($data)) {
             $session = session();
-                $session->remove(['id_user', 'nama_user', 'email_user']);
-            return redirect()->to(base_url('/administrasi/user-role/'))->with('message', 'User berhasil ditambahkan');
+            $session->remove(['id_user', 'nama_user', 'email_user']);
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan user');
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/user-role/'))->with('message', 'User berhasil ditambahkan');
     }
     function editUserRole($id)
     {
@@ -109,18 +135,42 @@ class UserRole extends BaseController
         ];
 
         if ($UserRoleModel->updateUserRole($id, $data)) {
-            return redirect()->to(base_url('/administrasi/user-role/'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/user-role/'));
     }
     function hapusUserRole($id)
     {
         $UserRoleModel = new UserRoleModel();
         if ($UserRoleModel->hapusUserRole($id)) {
-            return redirect()->to(base_url('/administrasi/user-role/'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/user-role/'));
     }
 }

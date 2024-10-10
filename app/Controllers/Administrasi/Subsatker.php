@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use App\Models\Administrasi\SubsatkerModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Subsatker extends BaseController
@@ -37,7 +38,9 @@ class Subsatker extends BaseController
     function prosesAddSubsatker()
     {
         $SubsatkerModel = new SubsatkerModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'kode_subsatker' => $this->request->getPost('kode_subsatker'),
             'nama_subsatker' => $this->request->getPost('nama_subsatker'),
             'jenis_induk_subsatker' => $this->request->getPost('jenis_induk_subsatker'),
@@ -45,10 +48,22 @@ class Subsatker extends BaseController
         ];
 
         if ($SubsatkerModel->addSubsatker($data)) {
-            return redirect()->to(base_url('administrasi/subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('administrasi/subsatker'));
     }
     function editSubsatker($id)
     {
@@ -74,18 +89,42 @@ class Subsatker extends BaseController
         ];
 
         if ($SubsatkerModel->updateSubsatker($id, $data)) {
-            return redirect()->to(base_url('/administrasi/subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/subsatker'));
     }
     function hapusSubsatker($id)
     {
         $SubsatkerModel = new SubsatkerModel();
         if ($SubsatkerModel->hapusSubsatker($id)) {
-            return redirect()->to(base_url('/administrasi/subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/subsatker'));
     }
 }

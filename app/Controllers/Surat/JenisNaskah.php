@@ -4,6 +4,7 @@ namespace App\Controllers\Surat;
 
 use App\Controllers\BaseController;
 use App\Models\Surat\JenisNaskahModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class JenisNaskah extends BaseController
@@ -33,16 +34,30 @@ class JenisNaskah extends BaseController
     function prosesAddJenisNaskah()
     {
         $JenisNaskahModel = new JenisNaskahModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($JenisNaskahModel->addJenisNaskah($data)) {
-            return redirect()->to(base_url('/surat/jenis-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/jenis-naskah'));
     }
     function editJenisNaskah($id)
     {
@@ -63,18 +78,42 @@ class JenisNaskah extends BaseController
         ];
 
         if ($JenisNaskahModel->updateJenisNaskah($id, $data)) {
-            return redirect()->to(base_url('/surat/jenis-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/jenis-naskah'));
     }
     function hapusJenisNaskah($id)
     {
         $JenisNaskahModel = new JenisNaskahModel();
         if ($JenisNaskahModel->hapusJenisNaskah($id)) {
-            return redirect()->to(base_url('/surat/jenis-naskah'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/jenis-naskah'));
     }
 }

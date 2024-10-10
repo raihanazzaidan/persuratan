@@ -4,18 +4,19 @@ namespace App\Controllers\Surat;
 
 use App\Controllers\BaseController;
 use App\Models\Surat\RegistrasiSuratMasukModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class RegistrasiSuratMasuk extends BaseController
 {
     private $modul = 'Surat';
-    private $title = 'Surat Masuk';
+    private $title = 'Registrasi Surat Masuk';
     private $subtitle = 'Upload Surat Masuk';
     private $subtitle2 = 'Edit Surat Masuk';
 
     function getSuratMasuk()
     {
-        $SuratMasukModel = new RegistrasiSuratMasukModel();
+        $SuratMasukModel = new RegistrasiSuratMasukModel(); 
         $data['suratmasuk'] = $SuratMasukModel->getSuratMasuk();
         $data['jenisnaskah'] = $SuratMasukModel->getData_jenisnaskah();
         $data['sifatnaskah'] = $SuratMasukModel->getData_sifatnaskah();
@@ -42,6 +43,9 @@ class RegistrasiSuratMasuk extends BaseController
     function prosesAddSuratMasuk()
     {
         $SuratMasukModel = new RegistrasiSuratMasukModel();
+        $uuid =  Uuid::uuid4()->toString();
+        $session = session();
+        $user_register = $session->get('id');
 
         // Mengambil file yang di-upload
         $fileNaskah = $this->request->getFile('file_naskah');
@@ -65,6 +69,7 @@ class RegistrasiSuratMasuk extends BaseController
         $createdAt = gmdate("Y-m-d H:i:s", time() + 25200);
         // Data yang akan disimpan
         $data = [
+            'id' => $uuid,
             'nama_pengirim' => $this->request->getPost('nama_pengirim'),
             'jabatan_pengirim' => $this->request->getPost('jabatan_pengirim'),
             'instansi_pengirim' => $this->request->getPost('instansi_pengirim'),
@@ -79,15 +84,28 @@ class RegistrasiSuratMasuk extends BaseController
             'file_lampiran' => $fileLampiranName,
             'tujuan_subsatker_id' => $this->request->getPost('tujuan_subsatker_id'),
             'tujuan_personal_id' => $this->request->getPost('tujuan_personal_id'),
+            'user_register' => $user_register,
             'createdAt' => $createdAt,  // Menggunakan UTC time
         ];
 
         // Proses penyimpanan data
         if ($SuratMasukModel->addSuratMasuk($data)) {
-            return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
     }
 
     function editSuratMasuk($id)
@@ -165,10 +183,22 @@ class RegistrasiSuratMasuk extends BaseController
 
         // Proses penyimpanan data
         if ($SuratMasukModel->updateSuratMasuk($id, $data)) {
-            return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
     }
 
     function hapusSuratMasuk($id)
@@ -182,9 +212,21 @@ class RegistrasiSuratMasuk extends BaseController
         if ($SuratMasukModel->hapusSuratMasuk($id)) {
             unlink('./uploads/surat/' . $fileNaskah_lama);
             unlink('./uploads/lampiran/' . $fileLampiran_lama);
-            return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/registrasi-surat-masuk'));
     }
 }

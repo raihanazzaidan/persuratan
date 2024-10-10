@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use App\Models\Administrasi\HakAksesModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class HakAkses extends BaseController
@@ -33,8 +34,10 @@ class HakAkses extends BaseController
     function prosesAddHakAkses()
     {
         $HakAksesModel = new HakAksesModel();
+        $uuid =  Uuid::uuid4()->toString();
         // Ambil data dari form
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'keterangan' => $this->request->getPost('keterangan'),
             'level' => $this->request->getPost('level'),
@@ -43,10 +46,22 @@ class HakAkses extends BaseController
 
         // Panggil fungsi adduser dari model
         if ($HakAksesModel->addHakAkses($data)) {
-            return redirect()->to(base_url('/administrasi/hak-akses/'))->with('message', 'User berhasil ditambahkan');
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan user');
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/hak-akses/'))->with('message', 'User berhasil ditambahkan');
     }
     function editHakAkses($id)
     {
@@ -70,18 +85,42 @@ class HakAkses extends BaseController
         ];
 
         if ($HakAksesModel->updateHakAkses($id, $data)) {
-            return redirect()->to(base_url('/administrasi/hak-akses/'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/hak-akses/'));
     }
     function hapusHakAkses($id)
     {
         $HakAksesModel = new HakAksesModel();
         if ($HakAksesModel->hapusHakAkses($id)) {
-            return redirect()->to(base_url('/administrasi/hak-akses/'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/hak-akses/'));
     }
 }

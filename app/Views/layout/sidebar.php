@@ -1,8 +1,29 @@
-<div class="logout text-center my-3">
-    <a href='<?= base_url('/logout'); ?>' class="btn btn-danger w-75">
-        <i class="bi bi-box-arrow-right"></i> Logout
-    </a>
+<div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <img
+                    src="<?= base_url('assets/img/uinma.png'); ?>"
+                    class="rounded-circle" width="50px">
+            </span>
+        </div>
+        <span class="form-control text-center" style="font-size:13px; display:flex; align-items:center;">
+            <div style="margin: auto;">
+                <?= session()->nama_lengkap; ?>
+            </div>
+        </span>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Akses</span>
+        </div>
+        <input class="form-control" type="text" value="<?= session()->nama_hakakses; ?>" disabled>
+    </div>
+    <div class="input-group align-items-center">
+        <a href='<?= base_url('/logout'); ?>' id="logoutButton" class="btn btn-danger btn-block">Logout</a>
+    </div>
 </div>
+<hr>
 <div class="sidebar-menu">
     <ul class="menu">
         <li class="sidebar-title">Menu</li>
@@ -20,7 +41,7 @@
                 </a>
                 <ul class="submenu ">
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jenis-induk-subsatker') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/jenis-induk-subsatker'); ?>" class="submenu-link">Induk Subsatker</a>
+                        <a href="<?= base_url('administrasi/jenis-induk-subsatker'); ?>" class="submenu-link">Satuan Kerja</a>
                     </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/subsatker') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('administrasi/subsatker'); ?>" class="submenu-link">Subsatker</a>
@@ -59,7 +80,13 @@
                         <a href="<?= base_url('surat/sifat-naskah'); ?>" class="submenu-link">Sifat Naskah</a>
                     </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/registrasi-surat-masuk') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('surat/registrasi-surat-masuk'); ?>" class="submenu-link">Surat Masuk</a>
+                        <a href="<?= base_url('surat/registrasi-surat-masuk'); ?>" class="submenu-link">Registrasi Surat Masuk</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/surat-masuk') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/surat-masuk'); ?>" class="submenu-link">Surat Masuk</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
                     </li>
                 </ul>
             </li>
@@ -111,10 +138,16 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/sifat-naskah') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/sifat-naskah'); ?>" class="submenu-link">Sifat Naskah</a>
                     </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/registrasi-surat-masuk') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/registrasi-surat-masuk'); ?>" class="submenu-link">Registrasi Surat Masuk</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
+                    </li>
                 </ul>
             </li>
         <?php endif; ?>
-        
+
         <?php if (session()->level == 11): ?>
             <li class="sidebar-item has-sub <?php if (service('uri')->getSegment(1) == 'administrasi') echo 'active'; ?>">
                 <a href="#" class='sidebar-link'>
@@ -158,11 +191,23 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/jenis-naskah') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/jenis-naskah'); ?>" class="submenu-link">Jenis Naskah</a>
                     </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/sifat-naskah') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('surat/sifat-naskah'); ?>" class="submenu-link">Sifat Naskah</a>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
                     </li>
                 </ul>
             </li>
         <?php endif; ?>
     </ul>
 </div>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var confirmation = confirm('Anda yakin ingin logout?');
+
+        if (confirmation) {
+            window.location.href = this.getAttribute('href');
+        }
+    });
+</script>

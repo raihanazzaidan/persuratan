@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use App\Models\Administrasi\TipeUserModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class TipeUser extends BaseController
@@ -32,17 +33,31 @@ class TipeUser extends BaseController
     }
     function prosesAddTipeUser()
     {
+        $uuid =  Uuid::uuid4()->toString();
         $TipeUserModel = new TipeUserModel();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($TipeUserModel->addTipeUser($data)) {
-            return redirect()->to(base_url('/administrasi/tipe-user'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/tipe-user'));
     }
     function editTipeUser($id)
     {
@@ -63,18 +78,42 @@ class TipeUser extends BaseController
         ];
 
         if ($TipeUserModel->updateTipeUser($id, $data)) {
-            return redirect()->to(base_url('/administrasi/tipe-user'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/tipe-user'));
     }
     function hapusTipeUser($id)
     {
         $TipeUserModel = new TipeUserModel();
         if ($TipeUserModel->hapusTipeUser($id)) {
-            return redirect()->to(base_url('/administrasi/tipe-user'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/tipe-user'));
     }
 }

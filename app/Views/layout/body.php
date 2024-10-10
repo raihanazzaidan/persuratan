@@ -1,5 +1,8 @@
 <body>
     <script src='<?= base_url('assets/dist/assets/static/js/initTheme.js'); ?>'></script>
+    <?php if ($sweetAlert = session()->getFlashdata('sweetAlert')): ?>
+        <div class="flash-data" data-flashmessage="<?= esc($sweetAlert['message']) ?>" data-flashicon="<?= esc($sweetAlert['icon']) ?>"></div>
+    <?php endif; ?>
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
@@ -47,7 +50,7 @@
         </div>
         <div id="main">
             <!-- isi content -->
-             <?php echo view('layout/content') ?>
+            <?php echo view('layout/content') ?>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">

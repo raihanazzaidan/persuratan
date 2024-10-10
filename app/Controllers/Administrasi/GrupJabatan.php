@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use  App\Models\Administrasi\GrupJabatanModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class GrupJabatan extends BaseController
@@ -33,16 +34,30 @@ class GrupJabatan extends BaseController
     function prosesAddGrupJabatan()
     {
         $GrupJabatanModel = new GrupJabatanModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($GrupJabatanModel->addGrupJabatan($data)) {
-            return redirect()->to(base_url('administrasi/grup-jabatan'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('administrasi/grup-jabatan'));
     }
     function editGrupJabatan($id)
     {
@@ -63,18 +78,42 @@ class GrupJabatan extends BaseController
         ];
 
         if ($GrupJabatanModel->updateGrupJabatan($id, $data)) {
-            return redirect()->to(base_url('/administrasi/grup-jabatan'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/grup-jabatan'));
     }
     function hapusGrupJabatan($id)
     {
         $GrupJabatanModel = new GrupJabatanModel();
         if ($GrupJabatanModel->hapusGrupJabatan($id)) {
-            return redirect()->to(base_url('/administrasi/grup-jabatan'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/grup-jabatan'));
     }
 }

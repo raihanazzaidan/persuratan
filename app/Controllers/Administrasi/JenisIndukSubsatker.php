@@ -4,6 +4,7 @@ namespace App\Controllers\Administrasi;
 
 use App\Controllers\BaseController;
 use App\Models\Administrasi\JenisIndukSubsatkerModel;
+use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class JenisIndukSubsatker extends BaseController
@@ -35,16 +36,30 @@ class JenisIndukSubsatker extends BaseController
     function prosesAddJenisIndukSubsatker()
     {
         $JenisIndukSubsatkerModel = new JenisIndukSubsatkerModel();
+        $uuid =  Uuid::uuid4()->toString();
         $data = [
+            'id' => $uuid,
             'nama' => $this->request->getPost('nama'),
             'status' => $this->request->getPost('status'),
         ];
 
         if ($JenisIndukSubsatkerModel->addJenisIndukSubsatker($data)) {
-            return redirect()->to(base_url('administrasi/jenis-induk-subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil ditambahkan',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menambahkan data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('administrasi/jenis-induk-subsatker'));
     }
     function editJenisIndukSubsatker($id)
     {
@@ -66,18 +81,42 @@ class JenisIndukSubsatker extends BaseController
         ];
 
         if ($JenisIndukSubsatkerModel->updateJenisIndukSubsatker($id, $data)) {
-            return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil diubah',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal mengubah data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
     }
     function hapusJenisIndukSubsatker($id)
     {
         $JenisIndukSubsatkerModel = new JenisIndukSubsatkerModel();
         if ($JenisIndukSubsatkerModel->hapusJenisIndukSubsatker($id)) {
-            return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Data berhasil dihapus',
+                    'icon' => 'success',
+                ],
+            ];
         } else {
-            return redirect()->back()->withInput();
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal menghapus data',
+                    'icon' => 'warning',
+                ],
+            ];
         }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/administrasi/jenis-induk-subsatker'));
     }
 }

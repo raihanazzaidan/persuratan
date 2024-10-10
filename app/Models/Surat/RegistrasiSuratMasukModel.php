@@ -10,12 +10,14 @@ class RegistrasiSuratMasukModel extends Model
     {
         $query = $this->db->query('SELECT
         registrasisuratmasuk.*, 
-        jenisnaskah.nama AS jenis_naskah, sifatnaskah.nama AS sifat_naskah, subsatker.nama_subsatker, user.nama_lengkap
+        jenisnaskah.nama AS jenis_naskah, sifatnaskah.nama AS sifat_naskah, subsatker.nama_subsatker, user.nama_lengkap AS tujuan_personal, u.nama_lengkap AS nama_user_register
         FROM registrasisuratmasuk
         JOIN jenisnaskah ON registrasisuratmasuk.jenis_naskah_id = jenisnaskah.id
         JOIN sifatnaskah ON registrasisuratmasuk.sifat_naskah_id = sifatnaskah.id
         JOIN subsatker ON registrasisuratmasuk.tujuan_subsatker_id = subsatker.id
-        JOIN user ON registrasisuratmasuk.tujuan_personal_id = user.id;');
+        JOIN user ON registrasisuratmasuk.tujuan_personal_id = user.id
+        JOIN user AS u ON registrasisuratmasuk.user_register = u.id
+        ;');
         return $query->getResult();
     }
 
@@ -47,7 +49,7 @@ class RegistrasiSuratMasukModel extends Model
     }
     function editSuratMasuk($id)
     {
-        $query = $this->db->query("SELECT * FROM registrasisuratmasuk WHERE registrasisuratmasuk.id=?", array($id)); 
+        $query = $this->db->query("SELECT * FROM registrasisuratmasuk WHERE registrasisuratmasuk.id=?", array($id));
         return $query->getResult();
     }
     function updateSuratMasuk($id, $data)

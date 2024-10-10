@@ -54,7 +54,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select name="status" class="form-select">
+                                <select name="status_user" class="form-select">
                                     <option value="" disabled selected>-- Status User --</option>
                                     <option value="N" <?= $data->status_user == 'N' ? 'selected' : ''; ?>>Tidak Aktif</option>
                                     <option value="Y" <?= $data->status_user == 'Y' ? 'selected' : ''; ?>>Aktif</option>
