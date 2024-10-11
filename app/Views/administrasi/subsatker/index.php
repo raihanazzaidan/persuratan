@@ -72,3 +72,8 @@
         </div>
     </div>
 </div>
+
+<script src="<?= base_url('assets/dist/assets/extensions/jquery/jquery.min.js'); ?>"></script>
+<script src="<?= base_url('assets/dist/assets/extensions/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?= base_url('assets/dist/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js'); ?>"></script>
+<script src="<?= base_url('assets/dist/assets/static/js/pages/datatables.js'); ?>"></script>

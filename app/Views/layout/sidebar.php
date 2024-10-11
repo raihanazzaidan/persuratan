@@ -41,7 +41,7 @@
                 </a>
                 <ul class="submenu ">
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jenis-induk-subsatker') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/jenis-induk-subsatker'); ?>" class="submenu-link">Satuan Kerja</a>
+                        <a href="<?= base_url('administrasi/jenis-induk-subsatker'); ?>" class="submenu-link">Jenis Induk Subsatker</a>
                     </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/subsatker') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('administrasi/subsatker'); ?>" class="submenu-link">Subsatker</a>
@@ -87,6 +87,9 @@
                     </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/disposisi') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/disposisi'); ?>" class="submenu-link"> Surat Disposisi</a>
                     </li>
                 </ul>
             </li>
@@ -141,8 +144,14 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/registrasi-surat-masuk') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/registrasi-surat-masuk'); ?>" class="submenu-link">Registrasi Surat Masuk</a>
                     </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/surat-masuk') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/surat-masuk'); ?>" class="submenu-link">Surat Masuk</a>
+                    </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/disposisi') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/disposisi'); ?>" class="submenu-link"> Surat Disposisi</a>
                     </li>
                 </ul>
             </li>
@@ -193,6 +202,15 @@
                     </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/surat-masuk') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/surat-masuk'); ?>" class="submenu-link">Surat Masuk</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
+                    </li>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/disposisi') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('surat/disposisi'); ?>" class="submenu-link"> Surat Disposisi</a>
                     </li>
                 </ul>
             </li>

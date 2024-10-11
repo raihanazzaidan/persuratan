@@ -71,7 +71,7 @@
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <a href='<?= base_url('/surat/surat-masuk/' . $sm->id); ?>' class="btn btn-danger">
+                                    <a href='<?= base_url('/surat/surat-masuk/disposisi/' . $sm->id); ?>' class="btn btn-danger">
                                     <i class=""></i>Disposisi</a>
                                     <a href='<?= base_url('/surat/surat-masuk/' . $sm->id); ?>' class="btn btn-danger">
                                     <i class=""></i>Note</a>
