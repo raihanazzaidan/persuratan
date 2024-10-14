@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
-                <a href='<?= base_url('/administrasi/user-role/'); ?>' class="btn btn-primary">Kembali</a>
+                <a href="<?= base_url('/administrasi/userrole'); ?>" class="btn btn-primary me-2">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -22,7 +24,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form action="<?= base_url('administrasi/user-role/adduserrole/pilih-user') ?>" enctype="multipart/form-data" method="post">
+            <form action="<?= base_url('administrasi/userrole/adduserrole/pilih-user') ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -43,10 +45,10 @@
                         ?>
                     </div>
                     <div class="col-12">
-                        <?php 
-                            if (!empty(session()->id_user)) {
-                                echo '<a href='.base_url('administrasi/user-role/adduserrole/hapus-pilihan-user').' class="btn btn-danger w-100">Reset</a>';
-                            }
+                        <?php
+                        if (!empty(session()->id_user)) {
+                            echo '<a href=' . base_url('administrasi/user-role/adduserrole/hapus-pilihan-user') . ' class="btn btn-danger w-100">Reset</a>';
+                        }
                         ?>
                     </div>
                 </div>
@@ -63,7 +65,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">User ID</label>
-                            <input type="text" name="usr_id" value="<?= session()->id_user; ?>"  class="form-control" placeholder="User ID" readonly>
+                            <input type="text" name="usr_id" value="<?= session()->id_user; ?>" class="form-control" placeholder="User ID" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">

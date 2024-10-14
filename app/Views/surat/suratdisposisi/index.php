@@ -35,6 +35,9 @@
                             <th>Pengirim</th>
                             <th>Hal</th>
                             <th>Catatan</th>
+                            <th>Status Surat</th>
+                            <th>Tanggal Selesai</th>
+                            <th>Catatan Selesai</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -49,6 +52,16 @@
                                 <td><?= $disposisi->nama_pengirim; ?></td>
                                 <td><?= $disposisi->hal; ?></td>
                                 <td><?= $disposisi->catatan_disposisi; ?></td>
+                                <td> <?php
+                                        if ($disposisi->status == 'Y') {
+                                            echo ('Selesai');
+                                        } else {
+                                            echo ('Belum Selesai');
+                                        }
+                                        ?>
+                                </td>
+                                <td><?= date('l, d F Y', strtotime($disposisi->tanggal_selesai)) ?></td>
+                                <td><?= $disposisi->catatan_selesai; ?></td>
                                 <td>
                                     <a href="<?= base_url('/surat/disposisi/detail/' . $disposisi->id_surat); ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Detail

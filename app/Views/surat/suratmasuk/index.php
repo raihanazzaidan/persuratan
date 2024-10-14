@@ -71,12 +71,15 @@
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <a href='<?= base_url('/surat/surat-masuk/disposisi/' . $sm->id); ?>' class="btn btn-danger">
-                                    <i class=""></i>Disposisi</a>
-                                    <a href='<?= base_url('/surat/surat-masuk/' . $sm->id); ?>' class="btn btn-danger">
-                                    <i class=""></i>Note</a>
-                                    <a href='<?= base_url('/surat/surat-masuk/' . $sm->id); ?>' class="btn btn-danger">
-                                    <i class=""></i>Kembali</a>
+                                    <a href='<?= base_url('/surat/surat-masuk/disposisi/' . $sm->id); ?>' class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-arrow-right-circle-fill"></i> Disposisi
+                                    </a>
+                                    <!-- <a href='<?= base_url('/surat/surat-masuk/note/' . $sm->id); ?>' class="btn btn-info btn-sm me-2">
+                                        <i class="bi bi-sticky-fill"></i> Note
+                                    </a>
+                                    <a href='<?= base_url('/surat/surat-masuk/kembali/' . $sm->id); ?>' class="btn btn-secondary btn-sm">
+                                        <i class="bi bi-arrow-left-circle-fill"></i> Kembali
+                                    </a> -->
                                 </td>
                             </tr>
                         <?php } ?>

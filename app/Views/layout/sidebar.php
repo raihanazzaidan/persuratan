@@ -61,8 +61,8 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jabatan') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('administrasi/jabatan'); ?>" class="submenu-link">Jabatan</a>
                     </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/user-role') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/user-role'); ?>" class="submenu-link">User Role</a>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/userrole') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('administrasi/userrole'); ?>" class="submenu-link">User Role</a>
                     </li>
                 </ul>
             </li>
@@ -123,8 +123,8 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jabatan') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('administrasi/jabatan'); ?>" class="submenu-link">Jabatan</a>
                     </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/user-role') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/user-role'); ?>" class="submenu-link">User Role</a>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/userrole') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('administrasi/userrole'); ?>" class="submenu-link">User Role</a>
                     </li>
                 </ul>
             </li>
@@ -185,8 +185,8 @@
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jabatan') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('administrasi/jabatan'); ?>" class="submenu-link">Jabatan</a>
                     </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/user-role') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/user-role'); ?>" class="submenu-link">User Role</a>
+                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/userrole') !== false) echo 'active'; ?>">
+                        <a href="<?= base_url('administrasi/userrole'); ?>" class="submenu-link">User Role</a>
                     </li>
                 </ul>
             </li>

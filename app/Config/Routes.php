@@ -71,14 +71,14 @@ $routes->post('/administrasi/hak-akses/edithakakses/prosesedithakakses/(:any)', 
 $routes->get('/administrasi/hak-akses/hapushakakses/(:any)', 'Administrasi\HakAkses::hapusHakAkses/$1');
 
 // CRUD User Role
-$routes->get('/administrasi/user-role', 'Administrasi\UserRole::getUserRole');
-$routes->get('/administrasi/user-role/adduserrole', 'Administrasi\UserRole::addUserRole');
-$routes->post('/administrasi/user-role/adduserrole/pilih-user', 'Administrasi\UserRole::pilihuser');
-$routes->get('/administrasi/user-role/adduserrole/hapus-pilihan-user', 'Administrasi\UserRole::hapus_session_pilih_user');
-$routes->post('/administrasi/user-role/adduserrole/prosesadduserrole', 'Administrasi\UserRole::prosesAddUserRole');
-$routes->get('/administrasi/user-role/edituserrole/(:any)', 'Administrasi\UserRole::editUserRole/$1');
-$routes->post('/administrasi/user-role/edituserrole/prosesedituserrole/(:any)', 'Administrasi\UserRole::prosesEditUserRole/$1');
-$routes->get('/administrasi/user-role/hapususerrole/(:any)', 'Administrasi\UserRole::hapusUserRole/$1');
+$routes->get('/administrasi/userrole', 'Administrasi\UserRole::getUserRole');
+$routes->get('/administrasi/userrole/adduserrole', 'Administrasi\UserRole::addUserRole');
+$routes->post('/administrasi/userrole/adduserrole/pilih-user', 'Administrasi\UserRole::pilihuser');
+$routes->get('/administrasi/userrole/adduserrole/hapus-pilihan-user', 'Administrasi\UserRole::hapus_session_pilih_user');
+$routes->post('/administrasi/userrole/adduserrole/prosesadduserrole', 'Administrasi\UserRole::prosesAddUserRole');
+$routes->get('/administrasi/userrole/edituserrole/(:any)', 'Administrasi\UserRole::editUserRole/$1');
+$routes->post('/administrasi/userrole/edituserrole/prosesedituserrole/(:any)', 'Administrasi\UserRole::prosesEditUserRole/$1');
+$routes->get('/administrasi/userrole/hapususerrole/(:any)', 'Administrasi\UserRole::hapusUserRole/$1');
 
 
 //--------- SURAT ---------
@@ -118,3 +118,4 @@ $routes->get('/surat/history-naskah-keluar', 'Surat\HistorySuratKeluar::getSurat
 // Surat Disposisi
 $routes->get('/surat/disposisi', 'Surat\Disposisi::getDisposisi');
 $routes->get('/surat/disposisi/detail/(:any)', 'Surat\Disposisi::detail/$1'); 
+$routes->post('/surat/disposisi/penyelesaian/(:any)', 'Surat\Disposisi::selesaikanDisposisi/$1'); 

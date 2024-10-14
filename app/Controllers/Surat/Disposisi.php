@@ -26,13 +26,13 @@ class Disposisi extends BaseController
         return view('layout/template', $data);
     }
 
-    function detail($id_surat)
+    function detail($id)
     {
         $DisposisiModel = new DisposisiModel();
         $data['modul'] = $this->modul;
         $data['title'] = $this->title;
         $data['subtitle2'] = $this->subtitle2;
-        $data['suratdisposisi'] = $DisposisiModel->getDetailSuratDisposisi($id_surat);
+        $data['suratdisposisi'] = $DisposisiModel->getDetailSuratDisposisi($id);
         $data['view'] = 'surat/suratdisposisi/detail';
         return view('layout/template', $data);
     }
@@ -65,7 +65,7 @@ class Disposisi extends BaseController
             'tanggal_disposisi' => $tanggal_disposisi,
             'catatan_disposisi' => $this->request->getPost('catatan_disposisi')
         ];
-        if ($disposisiModel->updateDisposisi($id, $data)) {
+        if ($disposisiModel->postDisposisi($id, $data)) {
             $sessFlashdata = [
                 'sweetAlert' => [
                     'message' => 'Disposisi surat berhasil',
@@ -82,5 +82,34 @@ class Disposisi extends BaseController
         }
         session()->setFlashdata($sessFlashdata);
         return redirect()->to(base_url('/surat/surat-masuk'));
+    }
+    function selesaikanDisposisi($id)
+    {
+        
+        $disposisiModel = new disposisiModel();
+        $data['getDisposisi'] = $disposisiModel->disposisi($id);
+        $tanggal_selesai = gmdate("Y-m-d H:i:s", time() + 25200);
+        $data = [
+            'status' => 'Y',
+            'tanggal_selesai' => $tanggal_selesai,
+            'catatan_selesai' => $this->request->getPost('catatan_selesai')
+        ];
+        if ($disposisiModel->selesaikanDisposisi($id, $data)) {
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Surat disposisi berhasil diselesaikan',
+                    'icon' => 'success',
+                ],
+            ];
+        } else {
+            $sessFlashdata = [
+                'sweetAlert' => [
+                    'message' => 'Gagal disposisi surat',
+                    'icon' => 'warning',
+                ],
+            ];
+        }
+        session()->setFlashdata($sessFlashdata);
+        return redirect()->to(base_url('/surat/disposisi'));
     }
 }
