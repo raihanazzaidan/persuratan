@@ -113,9 +113,13 @@ $routes->get('/surat/surat-masuk/disposisi/(:any)', 'Surat\Disposisi::disposisi/
 $routes->post('/surat/surat-masuk/disposisi/prosesdisposisi/(:any)', 'Surat\Disposisi::prosesDisposisi/$1');
 
 // Surat Keluar
-$routes->get('/surat/history-naskah-keluar', 'Surat\HistorySuratKeluar::getSuratKeluar');
+$routes->get('/surat/historynaskahkeluar', 'Surat\HistorySuratKeluar::getSuratKeluar');
 
 // Surat Disposisi
 $routes->get('/surat/disposisi', 'Surat\Disposisi::getDisposisi');
 $routes->get('/surat/disposisi/detail/(:any)', 'Surat\Disposisi::detail/$1'); 
 $routes->post('/surat/disposisi/penyelesaian/(:any)', 'Surat\Disposisi::selesaikanDisposisi/$1'); 
+$routes->post('/surat/disposisi/balas/(:any)', 'Surat\Disposisi::balasDisposisi/$1');
+$routes->post('/surat/disposisi/balaskan/(:any)', 'Surat\Disposisi::balaskanDisposisi/$1');
+$routes->post('/surat/disposisi/lanjut/(:any)', 'Surat\Disposisi::disposisiLanjut/$1');
+$routes->get('/surat/historydisposisi', 'Surat\HistoryDisposisi::index');

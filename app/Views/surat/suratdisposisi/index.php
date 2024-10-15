@@ -58,12 +58,22 @@
                                         }
                                         ?>
                                 </td>
+                                <?php if(!empty($disposisi->tanggal_selesai)): ?>
                                 <td><?= date('l, d F Y', strtotime($disposisi->tanggal_selesai)) ?></td>
-                                <?php if(!empty($disposisi->catatan_selesai)): ?>
-                                <td><?= $disposisi->catatan_selesai; ?></td>
                                 <?php else: ?>
-                                <td>(Tidak ada catatan)</td>
+                                <td>(Belum ditindak lanjuti)</td>
                                 <?php endif; ?>
+                                <td>
+                                    <?php if ($disposisi->status == 'Y'): ?>
+                                        <?php if (!empty($disposisi->catatan_selesai)): ?>
+                                            <?= $disposisi->catatan_selesai; ?>
+                                        <?php else: ?>
+                                            (Tidak ada catatan)
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        (Belum ditindak lanjuti)
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <a href="<?= base_url('/surat/disposisi/detail/' . $disposisi->id_surat); ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Detail

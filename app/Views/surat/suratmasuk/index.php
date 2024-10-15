@@ -49,7 +49,7 @@
                                 <td><?= $sm->nama_sn; ?></td>
                                 <td><?= $sm->nama_pengirim; ?></td>
                                 <td><?= $sm->nomor_naskah; ?></td>
-                                <td></td>
+                                <td><?= $sm->status; ?></td>
                                 <td><?= $sm->tanggal_naskah; ?></td>
                                 <td>
                                     <?php if ($sm->file_naskah) { ?>

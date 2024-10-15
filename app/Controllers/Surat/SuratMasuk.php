@@ -13,10 +13,9 @@ class SuratMasuk extends BaseController
     function getSuratMasuk()
     {
         $id = session()->id;
-        // print_r($id);
         $SuratMasukModel = new SuratMasukModel();
         $data['naskahmasuk'] = $SuratMasukModel->getNaskahMasuk_id($id);
-        $data['suratmasuk'] = $SuratMasukModel->getData_suratMasuk();
+        // $data['suratmasuk'] = $SuratMasukModel->getData_suratMasuk();
         $data['user'] = $SuratMasukModel->getData_user();
         $data['subsatker'] = $SuratMasukModel->getData_subsatker();
         $data['modul'] = $this->modul;

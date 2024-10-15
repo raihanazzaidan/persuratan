@@ -16,13 +16,19 @@ class HistoryNaskahKeluarModel extends Model
         s.nama_subsatker,
         jis.nama AS nama_jis,
         u.nama_lengkap AS nama_penerima,
-        u.email AS email_penerima
+        u.email AS email_penerima,
+        CASE 
+            WHEN d.id IS NOT NULL AND d.status = "Y" THEN "Selesai (Disposisi)"
+            WHEN d.id IS NOT NULL THEN "Disposisi"
+            ELSE "Belum Dibaca" 
+        END as status
         FROM registrasisuratmasuk AS sm
         JOIN jenisnaskah AS jn ON sm.jenis_naskah_id = jn.id
         JOIN sifatnaskah AS sn ON sm.sifat_naskah_id = sn.id
         JOIN subsatker AS s ON sm.tujuan_subsatker_id = s.id
         JOIN jenisinduksubsatker AS jis ON s.jenis_induk_subsatker = jis.id
         JOIN user AS u ON sm.tujuan_personal_id = u.id 
+        LEFT JOIN disposisi AS d ON sm.id = d.id_surat
         WHERE sm.user_register = ?', array($id));
         return $query->getResult();
     }

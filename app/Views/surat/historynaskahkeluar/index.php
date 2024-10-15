@@ -48,7 +48,7 @@
                                 <td><?= $surat->nama_sn; ?></td>
                                 <td><?= $surat->nama_penerima; ?></td>
                                 <td><?= $surat->nomor_naskah; ?></td>
-                                <td></td>
+                                <td><?= $surat->status; ?></td>
                                 <td><?= $surat->tanggal_naskah; ?></td>
                                 <td>
                                     <?php if ($surat->file_naskah) { ?>
