@@ -24,7 +24,7 @@
             <i class="bi bi-arrow-left-circle"></i> Kembali
         </a>
     </div>
-    <?php if ($suratdisposisi->status == 'N'): ?>
+    <?php if ($suratdisposisi->status == ''): ?>
     <div class="dropdown">
         <button class="btn btn-danger dropdown-toggle me-2" type="button"
             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -59,13 +59,13 @@
                 <strong>Nomor Naskah</strong>
                 <p class="text-muted"><?= $suratdisposisi->nomor_naskah ?></p>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <strong>Tanggal Naskah</strong>
                 <p class="text-muted"><?= date('l, d F Y', strtotime($suratdisposisi->tanggal_naskah)) ?></p>
-            </div>
+            </div> -->
             <div class="col-md-4">
-                <strong>Tanggal Naskah</strong>
-                <p class="text-muted"><?= date('l, d F Y', strtotime($suratdisposisi->tanggal_naskah)) ?></p>
+                <strong>Tanggal Diterima</strong>
+                <p class="text-muted"><?= date('l, d F Y', strtotime($suratdisposisi->tanggal_diterima)) ?></p>
             </div>
             <div class="col-md-4">
                 <strong>Tanggal Disposisi Naskah</strong>

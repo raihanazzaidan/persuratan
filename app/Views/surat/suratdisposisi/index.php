@@ -31,7 +31,6 @@
                             <th>No</th>
                             <th>Nomor Surat</th>
                             <th>Tanggal Disposisi</th>
-                            <th>Tanggal Surat Diterima</th>
                             <th>Pengirim</th>
                             <th>Hal</th>
                             <th>Catatan</th>
@@ -48,7 +47,6 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $disposisi->nomor_naskah; ?></td>
                                 <td><?= date('l, d F Y', strtotime($disposisi->tanggal_disposisi)) ?></td>
-                                <td><?= date('l, d F Y', strtotime($disposisi->tanggal_diterima)) ?></td>
                                 <td><?= $disposisi->nama_pengirim; ?></td>
                                 <td><?= $disposisi->hal; ?></td>
                                 <td><?= $disposisi->catatan_disposisi; ?></td>
@@ -56,12 +54,16 @@
                                         if ($disposisi->status == 'Y') {
                                             echo ('Selesai');
                                         } else {
-                                            echo ('Belum Selesai');
+                                            echo ('Perlu tindak lanjut');
                                         }
                                         ?>
                                 </td>
                                 <td><?= date('l, d F Y', strtotime($disposisi->tanggal_selesai)) ?></td>
+                                <?php if(!empty($disposisi->catatan_selesai)): ?>
                                 <td><?= $disposisi->catatan_selesai; ?></td>
+                                <?php else: ?>
+                                <td>(Tidak ada catatan)</td>
+                                <?php endif; ?>
                                 <td>
                                     <a href="<?= base_url('/surat/disposisi/detail/' . $disposisi->id_surat); ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Detail

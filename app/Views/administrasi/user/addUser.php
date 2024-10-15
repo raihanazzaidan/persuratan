@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
-                <a href='<?= base_url('/administrasi/user/'); ?>' class="btn btn-primary">Kembali</a>
+                <a href="<?= base_url('/administrasi/user'); ?>" class="btn btn-primary me-2">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">

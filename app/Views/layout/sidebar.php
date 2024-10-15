@@ -158,51 +158,12 @@
         <?php endif; ?>
 
         <?php if (session()->level == 11): ?>
-            <li class="sidebar-item has-sub <?php if (service('uri')->getSegment(1) == 'administrasi') echo 'active'; ?>">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-grid"></i>
-                    <span>Administrasi</span>
-                </a>
-                <ul class="submenu ">
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jenis-induk-subsatker') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/jenis-induk-subsatker'); ?>" class="submenu-link">Induk Subsatker</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/subsatker') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/subsatker'); ?>" class="submenu-link">Subsatker</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/user') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/user'); ?>" class="submenu-link">User</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/tipe-user') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/tipe-user'); ?>" class="submenu-link">Tipe User</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/hak-akses') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/hak-akses'); ?>" class="submenu-link">Hak Akses</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/grup-jabatan') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/grup-jabatan'); ?>" class="submenu-link">Grup Jabatan</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/jabatan') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/jabatan'); ?>" class="submenu-link">Jabatan</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'administrasi/userrole') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('administrasi/userrole'); ?>" class="submenu-link">User Role</a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="sidebar-item has-sub <?php if (service('uri')->getSegment(1) == 'surat') echo 'active'; ?>">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-folder"></i>
                     <span>Surat</span>
                 </a>
                 <ul class="submenu ">
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/jenis-naskah') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('surat/jenis-naskah'); ?>" class="submenu-link">Jenis Naskah</a>
-                    </li>
-                    <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/history-naskah-keluar') !== false) echo 'active'; ?>">
-                        <a href="<?= base_url('surat/history-naskah-keluar'); ?>" class="submenu-link"> History Surat Keluar</a>
-                    </li>
                     <li class="submenu-item <?php if (strpos(service('uri')->getPath(), 'surat/surat-masuk') !== false) echo 'active'; ?>">
                         <a href="<?= base_url('surat/surat-masuk'); ?>" class="submenu-link">Surat Masuk</a>
                     </li>

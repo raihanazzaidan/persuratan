@@ -4,7 +4,9 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3><?= $title; ?></h3>
-                    <a href='<?= base_url('/administrasi/jabatan'); ?>' class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url('/administrasi/jabatan'); ?>" class="btn btn-primary me-2">
+                        <i class="bi bi-arrow-left-circle"></i> Kembali
+                    </a>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -37,9 +39,9 @@
                             <div class="form-group">
                                 <label for="">Subsatker</label>
                                 <select name="subsatker_id" class="form-select">
-                                <option value="" disabled selected>-- Subsatker --</option>
+                                    <option value="" disabled selected>-- Subsatker --</option>
                                     <?php foreach ($s as $value => $s) { ?>
-                                        <option value="<?= $s->id ?>" <?= $s->id == $data->subsatker_id ? 'selected':'' ?>><?= $s->nama_subsatker; ?></option>
+                                        <option value="<?= $s->id ?>" <?= $s->id == $data->subsatker_id ? 'selected' : '' ?>><?= $s->nama_subsatker; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -48,7 +50,7 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" class="form-select">
-                                <option value="" disabled selected>-- Status --</option>
+                                    <option value="" disabled selected>-- Status --</option>
                                     <option value="0" <?= $data->status == '0' ? 'selected' : ''; ?>>Tidak Aktif</option>
                                     <option value="1" <?= $data->status == '1' ? 'selected' : ''; ?>>Aktif</option>
                                 </select>

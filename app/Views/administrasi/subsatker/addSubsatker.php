@@ -4,7 +4,9 @@
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
                 <!-- <p class="text-subtitle text-muted">Tambahkan user baru</p> -->
-                <a href='<?= base_url('/administrasi/subsatker'); ?>' class="btn btn-primary">Kembali</a>
+                <a href="<?= base_url('/administrasi/subsatker'); ?>" class="btn btn-primary me-2">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -44,7 +46,7 @@
                         <div class="form-group">
                             <label for="">Jenis Induk Subsatker</label>
                             <select name="jenis_induk_subsatker" class="form-select">
-                            <option value="" disabled selected>-- Pilih Jenis Induk Subsatker --</option>
+                                <option value="" disabled selected>-- Pilih Jenis Induk Subsatker --</option>
                                 <?php foreach ($jis as $value => $jis) { ?>
                                     <option value="<?= $jis->id ?>"><?= $jis->nama; ?></option>
                                 <?php } ?>
@@ -55,7 +57,7 @@
                         <div class="form-group">
                             <label for="">Status</label>
                             <select name="status" class="form-select">
-                            <option value="" disabled selected>-- Status Subsatker --</option>
+                                <option value="" disabled selected>-- Status Subsatker --</option>
                                 <option value="0">Tidak Aktif</option>
                                 <option value="1">Aktif</option>
                             </select>

@@ -4,7 +4,9 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3><?= $title; ?></h3>
-                    <a href='<?= base_url('/administrasi/subsatker'); ?>' class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url('/administrasi/subsatker'); ?>" class="btn btn-primary me-2">
+                        <i class="bi bi-arrow-left-circle"></i> Kembali
+                    </a>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -29,13 +31,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="kode_subsatker">Kode Subsatker</label>
-                                <input type="text" name="kode_subsatker" value="<?=($data->kode_subsatker); ?>" class="form-control">
+                                <input type="text" name="kode_subsatker" value="<?= ($data->kode_subsatker); ?>" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nama_subsatker">Nama Subsatker</label>
-                                <input type="text" name="nama_subsatker" value="<?=($data->nama_subsatker); ?>" class="form-control">
+                                <input type="text" name="nama_subsatker" value="<?= ($data->nama_subsatker); ?>" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -43,7 +45,7 @@
                                 <label for="">Jenis Induk Subsatker</label>
                                 <select name="jenis_induk_subsatker" class="form-select">
                                     <?php foreach ($jis as $value => $jis) { ?>
-                                        <option value="<?= $jis->id ?>" <?= $jis->id == $data->jenis_induk_subsatker ? 'selected':'' ?>><?= $jis->nama; ?></option>
+                                        <option value="<?= $jis->id ?>" <?= $jis->id == $data->jenis_induk_subsatker ? 'selected' : '' ?>><?= $jis->nama; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

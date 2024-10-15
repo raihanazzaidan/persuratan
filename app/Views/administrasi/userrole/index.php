@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
-                <a href='<?= base_url('administrasi/user-role/adduserrole'); ?>' class="btn btn-primary">Tambah User Role</a>
+                <a href='<?= base_url('administrasi/userrole/adduserrole'); ?>' class="btn btn-primary">Tambah User Role</a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -50,9 +50,9 @@
                                 <td><?= $userrole->nama_tipeuser; ?></td>
                                 <td><?= $userrole->nama_subsatker; ?></td>
                                 <td>
-                                    <a href='<?= base_url('/administrasi/user-role/edituserrole/' . $userrole->id); ?>' class="btn btn-primary">
+                                    <a href='<?= base_url('/administrasi/userrole/edituserrole/' . $userrole->id); ?>' class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i> Edit</a>
-                                    <a href='<?= base_url('/administrasi/user-role/hapususerrole/' . $userrole->id); ?>' class="btn btn-danger">
+                                    <a href='<?= base_url('/administrasi/userrole/hapususerrole/' . $userrole->id); ?>' class="btn btn-danger">
                                     <i class="bi bi-trash-fill"></i> Hapus</a>
                                 </td>
                             </tr>
