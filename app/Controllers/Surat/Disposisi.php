@@ -4,6 +4,7 @@ namespace App\Controllers\Surat;
 
 use App\Controllers\BaseController;
 use App\Models\Surat\DisposisiModel;
+use App\Models\Surat\KomentarDisposisiModel;
 use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -29,10 +30,13 @@ class Disposisi extends BaseController
     function detail($id)
     {
         $DisposisiModel = new DisposisiModel();
+        $KomentarModel = new KomentarDisposisiModel();
+        
         $data['modul'] = $this->modul;
         $data['title'] = $this->title;
         $data['subtitle2'] = $this->subtitle2;
         $data['suratdisposisi'] = $DisposisiModel->getDetailSuratDisposisi($id);
+        $data['komentar'] = $KomentarModel->getKomentarByDisposisiId($id);
         $data['view'] = 'surat/suratdisposisi/detail';
         return view('layout/template', $data);
     }
@@ -81,7 +85,7 @@ class Disposisi extends BaseController
             ];
         }
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to(base_url('/surat/surat-masuk'));
+        return redirect()->to(base_url('/surat/historydisposisi'));
     }
     function selesaikanDisposisi($id)
     {
@@ -112,4 +116,5 @@ class Disposisi extends BaseController
         session()->setFlashdata($sessFlashdata);
         return redirect()->to(base_url('/surat/disposisi'));
     }
+
 }

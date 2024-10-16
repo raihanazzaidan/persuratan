@@ -119,7 +119,7 @@ $routes->get('/surat/historynaskahkeluar', 'Surat\HistorySuratKeluar::getSuratKe
 $routes->get('/surat/disposisi', 'Surat\Disposisi::getDisposisi');
 $routes->get('/surat/disposisi/detail/(:any)', 'Surat\Disposisi::detail/$1'); 
 $routes->post('/surat/disposisi/penyelesaian/(:any)', 'Surat\Disposisi::selesaikanDisposisi/$1'); 
-$routes->post('/surat/disposisi/balas/(:any)', 'Surat\Disposisi::balasDisposisi/$1');
-$routes->post('/surat/disposisi/balaskan/(:any)', 'Surat\Disposisi::balaskanDisposisi/$1');
-$routes->post('/surat/disposisi/lanjut/(:any)', 'Surat\Disposisi::disposisiLanjut/$1');
+$routes->post('surat/disposisi/komentar', 'Surat\KomentarDisposisi::create');
+$routes->delete('surat/disposisi/komentar/(:any)', 'Surat\KomentarDisposisi::delete/$1');
+$routes->get('surat/disposisi/get-komentar/(:segment)', 'Surat\KomentarDisposisi::getKomentar/$1');
 $routes->get('/surat/historydisposisi', 'Surat\HistoryDisposisi::index');
