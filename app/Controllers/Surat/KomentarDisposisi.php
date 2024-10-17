@@ -26,11 +26,19 @@ class KomentarDisposisi extends BaseController
             'id' => $uuid,
             'disposisi_id' => $disposisiId,
             'user_id' => $userId,
-            'komentar' => $isiKomentar
+            'komentar' => $isiKomentar,
+            'createdAt' => gmdate('Y-m-d H:i:s')  // Simpan waktu dalam UTC
         ];
 
         if ($this->komentarModel->insert($data)) {
             $newKomentar = $this->komentarModel->getKomentarByDisposisiId($disposisiId);
+            
+            foreach ($newKomentar as &$k) {
+                $date = new \DateTime($k['createdAt'], new \DateTimeZone('UTC'));
+                $date->setTimezone(new \DateTimeZone('Asia/Jakarta'));
+                $k['formattedDate'] = $date->format('d M H:i');
+            }
+            
             $response = [
                 'status' => 'success',
                 'komentar' => $newKomentar
@@ -50,8 +58,9 @@ class KomentarDisposisi extends BaseController
         $KomentarModel = new KomentarDisposisiModel();
         $komentar = $KomentarModel->getKomentarByDisposisiId($id);
 
-        foreach ($komentar as $k) {
-            $date = new \DateTime($k['createdAt']);
+        foreach ($komentar as &$k) {
+            $date = new \DateTime($k['createdAt'], new \DateTimeZone('UTC'));
+            $date->setTimezone(new \DateTimeZone('Asia/Jakarta'));
             $k['formattedDate'] = $date->format('d M H:i');
         }
 

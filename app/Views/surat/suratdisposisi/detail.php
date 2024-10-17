@@ -310,7 +310,7 @@
                                 <div class="chat-message <?= ($k['user_id'] == session()->get('id')) ? 'bg-primary text-white' : 'bg-light'; ?> d-inline-block p-2 rounded">
                                     <strong><?= $k['nama_pengirim']; ?></strong>
                                     <p class="mb-0"><?= nl2br($k['komentar']); ?></p>
-                                    <small class="text-muted"><?= date('d M H:i', strtotime($k['createdAt'])); ?></small>
+                                    <small class="text-muted"><?= date('d M H:i', strtotime($k['createdAt']) + 7 * 3600); ?></small>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -392,8 +392,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatDate(date) {
-        const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false };
-        return date.toLocaleDateString('id-ID', options).replace(',', '');
+        const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' };
+        return date.toLocaleString('id-ID', options).replace(',', '');
     }
 
     function updateKomentar() {

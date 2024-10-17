@@ -14,6 +14,7 @@ class KomentarDisposisiModel extends Model
     protected $allowedFields = ['id', 'disposisi_id', 'user_id', 'parent_id', 'komentar'];
 
     protected $useTimestamps = true;
+    protected $dateFormat = 'datetime';
     protected $createdField  = 'createdAt';
     protected $updatedField  = 'updatedAt';
 
