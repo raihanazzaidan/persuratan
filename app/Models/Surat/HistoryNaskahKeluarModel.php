@@ -19,6 +19,7 @@ class HistoryNaskahKeluarModel extends Model
         u.email AS email_penerima,
         CASE 
             WHEN d.id IS NOT NULL AND d.status = "Y" THEN "Selesai (Disposisi)"
+            WHEN d.id IS NOT NULL AND d.status = "N" THEN "Batal (Disposisi)"
             WHEN d.id IS NOT NULL THEN "Disposisi"
             ELSE "Belum Dibaca" 
         END as status

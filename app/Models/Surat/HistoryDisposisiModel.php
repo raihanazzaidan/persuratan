@@ -17,7 +17,8 @@ class HistoryDisposisiModel extends Model
         FROM disposisi
         JOIN registrasisuratmasuk AS suratmasuk ON disposisi.id_surat = suratmasuk.id
         JOIN user AS tujuan ON disposisi.tujuan_id = tujuan.id
-        WHERE disposisi.pengirim_id = ?', array($id));
+        WHERE disposisi.pengirim_id = ?
+        ORDER BY disposisi.tanggal_disposisi DESC', array($id));
         return $query->getResult();
     }
 }

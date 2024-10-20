@@ -8,7 +8,7 @@ class UserModel extends Model
 {
     function getData()
     {
-        $query = $this->db->query("SELECT * FROM user AS u");
+        $query = $this->db->query("SELECT * FROM user AS u ORDER BY u.nama_lengkap ASC");
         return  $query->getResult();
     }
 

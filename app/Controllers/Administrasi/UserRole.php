@@ -57,7 +57,7 @@ class UserRole extends BaseController
             ],
         ];
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to('administrasi/user-role/adduserrole/');
+        return redirect()->to('administrasi/role/adduserrole/');
     }
 
     function hapus_session_pilih_user()
@@ -71,7 +71,7 @@ class UserRole extends BaseController
             ],
         ];
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to('administrasi/user-role/adduserrole');
+        return redirect()->to('administrasi/role/adduserrole');
     }
 
     function prosesAddUserRole()
@@ -103,7 +103,7 @@ class UserRole extends BaseController
             ];
         }
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to(base_url('/administrasi/user-role/'))->with('message', 'User berhasil ditambahkan');
+        return redirect()->to(base_url('/administrasi/role/'))->with('message', 'User berhasil ditambahkan');
     }
     function editUserRole($id)
     {
@@ -150,7 +150,7 @@ class UserRole extends BaseController
             ];
         }
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to(base_url('/administrasi/user-role/'));
+        return redirect()->to(base_url('/administrasi/role/'));
     }
     function hapusUserRole($id)
     {
@@ -171,6 +171,6 @@ class UserRole extends BaseController
             ];
         }
         session()->setFlashdata($sessFlashdata);
-        return redirect()->to(base_url('/administrasi/user-role/'));
+        return redirect()->to(base_url('/administrasi/role/'));
     }
 }

@@ -20,45 +20,46 @@
 <div class="btn-group mb-1 float-end">
     <?php
     $session = session();
-    $current_user = $session->get('nama_lengkap');
+    $current_user = $session->get('id');
     ?>
-    <div>
-        <?php if ($current_user == $suratdisposisi->nama_tujuan): ?>
-        <a href="<?= base_url('/surat/disposisi'); ?>" class="btn btn-primary me-2">
-            <i class="bi bi-arrow-left-circle"></i> Kembali
-        </a>
-        <?php else: ?>
-        <a href="<?= base_url('/surat/historydisposisi'); ?>" class="btn btn-primary me-2">
-            <i class="bi bi-arrow-left-circle"></i> Kembali
-        </a>
+    <div class="d-flex justify-content-end">
+        <?php if ($current_user == $suratdisposisi->tujuan_id): ?>
+            <a href="<?= base_url('/surat/disposisi'); ?>" class="btn btn-secondary me-2">
+                <i class="bi bi-arrow-left-circle"></i> Kembali
+            </a>
+            <?php if ($suratdisposisi->status == ''): ?>
+                <div class="dropdown me-2">
+                    <button class="btn btn-warning dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="bi bi-arrow-repeat"></i> Tindak Lanjut
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#balasModal">
+                            <i class="bi bi-reply"></i> Saya balas
+                        </a>
+                    </div>
+                </div>
+                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#selesaikanDisposisiModal" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-check-circle"></i> Penyelesaian Disposisi
+                </button>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($current_user == $suratdisposisi->pengirim_id): ?>
+            <a href="<?= base_url('/surat/historydisposisi'); ?>" class="btn btn-secondary me-2">
+                <i class="bi bi-arrow-left-circle"></i> Kembali
+            </a>
+            <?php if ($suratdisposisi->status == ''): ?>
+                <button class="btn btn-warning me-2" type="button" data-bs-toggle="modal" data-bs-target="#pindahDisposisiModal" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-arrow-repeat"></i> Pindah Disposisi
+                </button>
+                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#batalDisposisiModal" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-x-circle"></i> Batalkan Disposisi
+                </button>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
-
-    <?php if ($suratdisposisi->status == '' && $current_user !== $suratdisposisi->nama_pengirim): ?>
-        <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle me-2" type="button"
-                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="bi bi-arrow-repeat"></i> Tindak Lanjut
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#balasModal">
-                    <i class="bi bi-reply"></i> Saya balas
-                </a>
-                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#balaskanModal">
-                    <i class="bi bi-reply-all"></i> Dibalaskan oleh
-                </a>
-                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#disposisiLanjutModal">
-                    <i class="bi bi-arrows-angle-contract"></i> Disposisi / Koordinasi / Saran
-                </a>
-            </div>
-        </div>
-        <div>
-            <button class="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#selesaikanDisposisiModal" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-check-circle"></i> Penyelesaian Disposisi
-            </button>
-        </div>
-    <?php endif; ?>
 </div>
 <div class="row">
     <div class="col-md-8">
@@ -102,10 +103,10 @@
 
 
                 <div class="row mb-4">
-                    <?php if ($current_user == $suratdisposisi->nama_pengirim): ?>
+                    <?php if ($current_user == $suratdisposisi->tujuan_id): ?>
                         <div class="col-md-6">
-                            <strong>Nama penerima disposisi</strong>
-                            <p class="text-muted"><?= $suratdisposisi->nama_tujuan ?></p>
+                            <strong>Nama pengirim disposisi</strong>
+                            <p class="text-muted"><?= $suratdisposisi->nama_pengirim ?></p>
                         </div>
                     <?php endif; ?>
                     <div class="col-md-6">
@@ -194,8 +195,64 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Selesaikan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<?php foreach ($suratdisposisi as $data) { ?>
+    <div class="modal fade" id="pindahDisposisiModal" tabindex="-1" aria-labelledby="pindahDisposisiModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pindahDisposisiModalLabel">Pindah Disposisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?= base_url('/surat/disposisi/pindah/' . $suratdisposisi->id); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label for="nama_tujuan">Nama Tujuan</label>
+                            <select name="nama_tujuan" class="form-select" required>
+                                <option value="" disabled selected>-- Pilih User yang Dituju --</option>
+                                <?php foreach ($user as $u) { ?>
+                                    <option value="<?= $u->id ?>" <?= $u->id == $suratdisposisi->nama_tujuan ? 'selected' : ''; ?>><?= $u->nama_lengkap; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="catatan_disposisi">Catatan Disposisi Baru</label>
+                            <textarea class="form-control" id="catatan_disposisi" name="catatan_disposisi" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Pindahkan Disposisi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<?php foreach ($suratdisposisi as $data) { ?>
+    <div class="modal fade" id="batalDisposisiModal" tabindex="-1" aria-labelledby="batalDisposisiModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="batalDisposisiModalLabel">Batalkan Disposisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?= base_url('/surat/disposisi/batal/' . $suratdisposisi->id); ?>" method="post">
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin ingin membatalkan disposisi ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Batalkan Disposisi</button>
                     </div>
                 </form>
             </div>
@@ -270,7 +327,6 @@
                     <div class="form-group">
                         <label for="tujuan_id">Tujuan Disposisi</label>
                         <select class="form-control" id="tujuan_id" name="tujuan_id" required>
-                            <!-- Isi dengan daftar pengguna yang bisa menerima disposisi -->
                         </select>
                     </div>
                     <div class="form-group">
@@ -335,86 +391,94 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const chatContainer = document.getElementById('chat-container');
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    const komentarForm = document.getElementById('komentar-form');
-    if (komentarForm) {
-        komentarForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            fetch(this.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    addNewComments(data.komentar);
-                    komentarForm.reset();
-                } else {
-                    alert('Gagal menambahkan komentar');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat menambahkan komentar');
-            });
-        });
-    }
-
-    let lastCommentId = null;
-
-    function addNewComments(comments) {
-        comments.forEach(k => {
-            if (k.id !== lastCommentId) {
-                const newComment = createCommentElement(k);
-                chatContainer.appendChild(newComment);
-                lastCommentId = k.id;
-            }
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatContainer = document.getElementById('chat-container');
         chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
 
-    function createCommentElement(k) {
-        const newComment = document.createElement('div');
-        newComment.className = `chat-bubble mb-3 ${k.user_id == <?= json_encode(session()->get('id')) ?> ? 'text-end' : ''}`;
-        newComment.innerHTML = `
+        const komentarForm = document.getElementById('komentar-form');
+        if (komentarForm) {
+            komentarForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            addNewComments(data.komentar);
+                            komentarForm.reset();
+                        } else {
+                            alert('Gagal menambahkan komentar');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat menambahkan komentar');
+                    });
+            });
+        }
+
+        let lastCommentId = null;
+
+        function addNewComments(comments) {
+            comments.forEach(k => {
+                if (k.id !== lastCommentId) {
+                    const newComment = createCommentElement(k);
+                    chatContainer.appendChild(newComment);
+                    lastCommentId = k.id;
+                }
+            });
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function createCommentElement(k) {
+            const newComment = document.createElement('div');
+            newComment.className = `chat-bubble mb-3 ${k.user_id == <?= json_encode(session()->get('id')) ?> ? 'text-end' : ''}`;
+            newComment.innerHTML = `
             <div class="chat-message ${k.user_id == <?= json_encode(session()->get('id')) ?> ? 'bg-primary text-white' : 'bg-light'} d-inline-block p-2 rounded">
                 <strong>${k.nama_pengirim}</strong>
                 <p class="mb-0">${k.komentar}</p>
                 <small class="text-muted">${formatDate(new Date(k.createdAt))}</small>
             </div>
         `;
-        return newComment;
-    }
+            return newComment;
+        }
 
-    function formatDate(date) {
-        const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' };
-        return date.toLocaleString('id-ID', options).replace(',', '');
-    }
+        function formatDate(date) {
+            const options = {
+                day: '2-digit',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: 'Asia/Jakarta'
+            };
+            return date.toLocaleString('id-ID', options).replace(',', '');
+        }
 
-    function updateKomentar() {
-        fetch(`<?= base_url('/surat/disposisi/getkomentar/' . $suratdisposisi->id); ?>`)
-            .then(response => response.json())
-            .then(data => {
-                addNewComments(data);
-            })
-            .catch(error => console.error('Error:', error));
-    }
+        function updateKomentar() {
+            fetch(`<?= base_url('/surat/disposisi/getkomentar/' . $suratdisposisi->id); ?>`)
+                .then(response => response.json())
+                .then(data => {
+                    addNewComments(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-    setInterval(updateKomentar, 5000);
-});
+        setInterval(updateKomentar, 5000);
+    });
 </script>
 
 <style>
-.chat-bubble {
-    margin-bottom: 10px;
-}
-.chat-message {
-    max-width: 70%;
-    word-wrap: break-word;
-}
+    .chat-bubble {
+        margin-bottom: 10px;
+    }
+
+    .chat-message {
+        max-width: 70%;
+        word-wrap: break-word;
+    }
 </style>

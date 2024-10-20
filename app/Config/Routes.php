@@ -71,14 +71,14 @@ $routes->post('/administrasi/hak-akses/edithakakses/prosesedithakakses/(:any)', 
 $routes->get('/administrasi/hak-akses/hapushakakses/(:any)', 'Administrasi\HakAkses::hapusHakAkses/$1');
 
 // CRUD User Role
-$routes->get('/administrasi/userrole', 'Administrasi\UserRole::getUserRole');
-$routes->get('/administrasi/userrole/adduserrole', 'Administrasi\UserRole::addUserRole');
-$routes->post('/administrasi/userrole/adduserrole/pilih-user', 'Administrasi\UserRole::pilihuser');
-$routes->get('/administrasi/userrole/adduserrole/hapus-pilihan-user', 'Administrasi\UserRole::hapus_session_pilih_user');
-$routes->post('/administrasi/userrole/adduserrole/prosesadduserrole', 'Administrasi\UserRole::prosesAddUserRole');
-$routes->get('/administrasi/userrole/edituserrole/(:any)', 'Administrasi\UserRole::editUserRole/$1');
-$routes->post('/administrasi/userrole/edituserrole/prosesedituserrole/(:any)', 'Administrasi\UserRole::prosesEditUserRole/$1');
-$routes->get('/administrasi/userrole/hapususerrole/(:any)', 'Administrasi\UserRole::hapusUserRole/$1');
+$routes->get('/administrasi/role', 'Administrasi\UserRole::getUserRole');
+$routes->get('/administrasi/role/adduserrole', 'Administrasi\UserRole::addUserRole');
+$routes->post('/administrasi/role/adduserrole/pilih-user', 'Administrasi\UserRole::pilihuser');
+$routes->get('/administrasi/role/adduserrole/hapus-pilihan-user', 'Administrasi\UserRole::hapus_session_pilih_user');
+$routes->post('/administrasi/role/adduserrole/prosesadduserrole', 'Administrasi\UserRole::prosesAddUserRole');
+$routes->get('/administrasi/role/edituserrole/(:any)', 'Administrasi\UserRole::editUserRole/$1');
+$routes->post('/administrasi/role/edituserrole/prosesedituserrole/(:any)', 'Administrasi\UserRole::prosesEditUserRole/$1');
+$routes->get('/administrasi/role/hapususerrole/(:any)', 'Administrasi\UserRole::hapusUserRole/$1');
 
 
 //--------- SURAT ---------
@@ -111,6 +111,7 @@ $routes->get('/surat/registrasi-surat-masuk/hapussuratmasuk/(:any)', 'Surat\Regi
 $routes->get('/surat/surat-masuk', 'Surat\SuratMasuk::getSuratMasuk');
 $routes->get('/surat/surat-masuk/disposisi/(:any)', 'Surat\Disposisi::disposisi/$1');
 $routes->post('/surat/surat-masuk/disposisi/prosesdisposisi/(:any)', 'Surat\Disposisi::prosesDisposisi/$1');
+$routes->post('surat/disposisi/pindah/(:any)', 'Surat\Disposisi::pindahDisposisi/$1');
 
 // Surat Keluar
 $routes->get('/surat/historynaskahkeluar', 'Surat\HistorySuratKeluar::getSuratKeluar');
@@ -123,3 +124,4 @@ $routes->post('surat/disposisi/komentar', 'Surat\KomentarDisposisi::create');
 $routes->delete('surat/disposisi/komentar/(:any)', 'Surat\KomentarDisposisi::delete/$1');
 $routes->get('surat/disposisi/get-komentar/(:segment)', 'Surat\KomentarDisposisi::getKomentar/$1');
 $routes->get('/surat/historydisposisi', 'Surat\HistoryDisposisi::index');
+$routes->post('/surat/disposisi/batal/(:any)', 'Surat\Disposisi::batalDisposisi/$1');

@@ -19,6 +19,7 @@ class SuratMasukModel extends Model
         u.email AS email_penerima,
         CASE 
             WHEN d.id IS NOT NULL AND d.status = "Y" THEN "Selesai (Disposisi)"
+            WHEN d.id IS NOT NULL AND d.status = "N" THEN "Batal (Disposisi)"
             WHEN d.id IS NOT NULL THEN "Disposisi"
             ELSE "Belum Dibaca" 
         END as status
@@ -29,7 +30,8 @@ class SuratMasukModel extends Model
         JOIN jenisinduksubsatker AS jis ON s.jenis_induk_subsatker = jis.id
         JOIN user AS u ON sm.tujuan_personal_id = u.id 
         LEFT JOIN disposisi AS d ON sm.id = d.id_surat
-        WHERE sm.tujuan_personal_id = ?', array($id));
+        WHERE sm.tujuan_personal_id = ?
+        ORDER BY sm.tanggal_naskah DESC', array($id));
         return $query->getResult();
     }
 

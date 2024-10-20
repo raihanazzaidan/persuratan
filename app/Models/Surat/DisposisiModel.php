@@ -26,7 +26,8 @@ class DisposisiModel extends Model
         JOIN registrasisuratmasuk AS suratmasuk ON disposisi.id_surat = suratmasuk.id
         JOIN user AS pengirim ON disposisi.pengirim_id = pengirim.id
         JOIN user AS tujuan ON disposisi.tujuan_id = tujuan.id
-        WHERE disposisi.tujuan_id = ?', array($id));
+        WHERE disposisi.tujuan_id = ?
+        ORDER BY disposisi.tanggal_disposisi DESC', array($id));
         return $query->getResult();
     }
 
@@ -75,10 +76,12 @@ class DisposisiModel extends Model
         $builder->where('id', $id);
         return $builder->insert($data);
     }
-    function updateDisposisi($id)
+    function updateDisposisi($id, $data)
     {
-        $query = $this->db->query("SELECT * FROM disposisi WHERE disposisi.id=?",array($id));
-        return  $query->getResult();
+        $db = \Config\Database::connect();
+        $builder = $db->table('disposisi');
+        $builder->where('id',$id);
+        return $builder->update($data);
     }
     function selesaikanDisposisi($id, $data)
     {
@@ -86,5 +89,12 @@ class DisposisiModel extends Model
         $builder = $db->table('disposisi');
         $builder->where('id', $id);
         return $builder->update($data);
+    }
+    function batalDisposisi($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('disposisi');
+        $builder->where('id', $id);
+        return $builder->delete();
     }
 }

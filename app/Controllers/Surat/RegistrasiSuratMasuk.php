@@ -16,8 +16,9 @@ class RegistrasiSuratMasuk extends BaseController
 
     function getSuratMasuk()
     {
+        $id = session()->id;
         $SuratMasukModel = new RegistrasiSuratMasukModel(); 
-        $data['suratmasuk'] = $SuratMasukModel->getSuratMasuk();
+        $data['suratmasuk'] = $SuratMasukModel->getSuratMasuk($id);
         $data['jenisnaskah'] = $SuratMasukModel->getData_jenisnaskah();
         $data['sifatnaskah'] = $SuratMasukModel->getData_sifatnaskah();
         $data['subsatker'] = $SuratMasukModel->getData_subsatker();

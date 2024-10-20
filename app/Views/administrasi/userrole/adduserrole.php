@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
-                <a href="<?= base_url('/administrasi/userrole'); ?>" class="btn btn-primary me-2">
+                <a href="<?= base_url('/administrasi/role'); ?>" class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left-circle"></i> Kembali
                 </a>
             </div>
@@ -24,7 +24,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <form action="<?= base_url('administrasi/userrole/adduserrole/pilih-user') ?>" enctype="multipart/form-data" method="post">
+            <form action="<?= base_url('administrasi/role/adduserrole/pilih-user') ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

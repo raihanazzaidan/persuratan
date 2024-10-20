@@ -27,7 +27,7 @@ class KomentarDisposisi extends BaseController
             'disposisi_id' => $disposisiId,
             'user_id' => $userId,
             'komentar' => $isiKomentar,
-            'createdAt' => gmdate('Y-m-d H:i:s')  // Simpan waktu dalam UTC
+            'createdAt' => gmdate('Y-m-d H:i:s')
         ];
 
         if ($this->komentarModel->insert($data)) {

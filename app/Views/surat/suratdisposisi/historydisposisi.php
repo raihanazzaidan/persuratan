@@ -42,33 +42,42 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($historyDisposisi as $id => $disposisi): ?>
-                                    <tr>
-                                        <td><?= $id + 1 ?></td>
-                                        <td><?= $disposisi->nomor_naskah?></td>
-                                        <td><?= $disposisi->hal?></td>
-                                        <td><?= $disposisi->nama_tujuan ?></td>
-                                        <td><?= date('d-m-Y H:i', strtotime($disposisi->tanggal_disposisi)) ?></td>
-                                        <td>
+                                        <tr>
+                                            <td><?= $id + 1 ?></td>
+                                            <td><?= $disposisi->nomor_naskah ?></td>
+                                            <td><?= $disposisi->hal ?></td>
+                                            <td><?= $disposisi->nama_tujuan ?></td>
+                                            <td><?= date('d-m-Y H:i', strtotime($disposisi->tanggal_disposisi)) ?></td>
+                                            <td>
+                                                <?php
+                                                if ($disposisi->status == 'Y') {
+                                                    echo 'Selesai';
+                                                } elseif ($disposisi->status == '') {
+                                                    echo 'Belum ditindak lanjut';
+                                                } elseif ($disposisi->status == 'N') {
+                                                    echo 'Dibatalkan';
+                                                }
+                                                ?>
+                                            </td>
                                             <?php
-                                            if ($disposisi->status == 'Y') {
-                                                echo 'Selesai';
-                                            } elseif ($disposisi->status == '') {
-                                                echo 'Belum ditindak lanjut';
-                                            } 
-                                            ?>
-                                        </td>
-                                            <?php 
                                             if (!empty($disposisi->catatan_selesai)): ?>
                                                 <td><?= $disposisi->catatan_selesai ?></td>
+                                            <?php elseif ($disposisi->status == 'N'): ?>
+                                                <td>(Disposisi dibatalkan)</td>
                                             <?php else: ?>
                                                 <td>Tidak ada catatan</td>
                                             <?php endif; ?>
-                                        <td>
-                                            <a href="<?= base_url('surat/disposisi/detail/' . $disposisi->id_surat) ?>" class="btn btn-sm btn-info">
-                                                <i class="bi bi-eye"></i> Detail
-                                            </a>
-                                        </td>
-                                    </tr>
+
+                                            <?php if ($disposisi->status != 'N'): ?>
+                                                <td>
+                                                    <a href="<?= base_url('surat/disposisi/detail/' . $disposisi->id_surat) ?>" class="btn btn-sm btn-info">
+                                                        <i class="bi bi-eye"></i> Detail
+                                                    </a>
+                                                </td>
+                                            <?php elseif ($disposisi->status == 'N'): ?>
+                                                <td>Tidak ada aksi</td>
+                                            <?php endif; ?>
+                                        </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

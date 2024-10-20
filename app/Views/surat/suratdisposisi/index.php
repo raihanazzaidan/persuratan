@@ -1,3 +1,7 @@
+<?php
+$session = session();
+$userLevel = $session->get('level');
+?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -53,15 +57,19 @@
                                 <td> <?php
                                         if ($disposisi->status == 'Y') {
                                             echo ('Selesai');
+                                        } elseif ($disposisi->status == 'N') {
+                                            echo ('Dibatalkan');
                                         } else {
                                             echo ('Perlu tindak lanjut');
                                         }
                                         ?>
                                 </td>
-                                <?php if(!empty($disposisi->tanggal_selesai)): ?>
-                                <td><?= date('l, d F Y', strtotime($disposisi->tanggal_selesai)) ?></td>
+                                <?php if (!empty($disposisi->tanggal_selesai)): ?>
+                                    <td><?= date('l, d F Y', strtotime($disposisi->tanggal_selesai)) ?></td>
+                                <?php elseif ($disposisi->status == 'N'): ?>
+                                    <td>(Disposisi dibatalkan)</td>
                                 <?php else: ?>
-                                <td>(Belum ditindak lanjuti)</td>
+                                    <td>(Belum ditindak lanjuti)</td>
                                 <?php endif; ?>
                                 <td>
                                     <?php if ($disposisi->status == 'Y'): ?>
@@ -70,15 +78,21 @@
                                         <?php else: ?>
                                             (Tidak ada catatan)
                                         <?php endif; ?>
+                                    <?php elseif ($disposisi->status == 'N'): ?>
+                                        (Disposisi dibatalkan)
                                     <?php else: ?>
                                         (Belum ditindak lanjuti)
                                     <?php endif; ?>
                                 </td>
-                                <td>
-                                    <a href="<?= base_url('/surat/disposisi/detail/' . $disposisi->id_surat); ?>" class="btn btn-info btn-sm">
-                                        <i class="bi bi-eye"></i> Detail
-                                    </a>
-                                </td>
+                                <?php if ($disposisi->status != 'N'): ?>
+                                    <td>
+                                        <a href="<?= base_url('/surat/disposisi/detail/' . $disposisi->id_surat); ?>" class="btn btn-info btn-sm">
+                                            <i class="bi bi-eye"></i> Detail
+                                        </a>
+                                    </td>
+                                <?php elseif ($disposisi->status == 'N'): ?>
+                                    <td>Tidak ada aksi</td>
+                                <?php endif; ?>
                             </tr>
                         <?php } ?>
                     </tbody>

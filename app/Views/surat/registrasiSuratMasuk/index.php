@@ -1,3 +1,7 @@
+<?php
+$session = session();
+$current_user = $session->get('id');
+?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -43,7 +47,6 @@
                             <th>File Lampiran</th>
                             <th>Tujuan Subsatker</th>
                             <th>Tujuan Personal</th>
-                            <th>User Register</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -84,14 +87,18 @@
                                 </td>
                                 <td><?= $surat->nama_subsatker; ?></td>
                                 <td><?= $surat->tujuan_personal; ?></td>
-                                <td><?= $surat->nama_user_register; ?></td>
                                 <td>
                                     <a href="<?= base_url('/surat/registrasi-surat-masuk/editsuratmasuk/' . $surat->id); ?>" class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i> Edit
                                     </a>
-                                    <a href="<?= base_url('/surat/registrasi-surat-masuk/hapussuratmasuk/' . $surat->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus surat ini?')">
+                                    <?php if ($current_user == $surat-> user_register): ?>
+                                        <button class="btn btn-warning btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#disposisiModal" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-arrow-repeat"></i> Disposisi
+                                        </button>
+                                    <?php endif; ?>
+                                    <!-- <a href="<?= base_url('/surat/registrasi-surat-masuk/hapussuratmasuk/' . $surat->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus surat ini?')">
                                         <i class="bi bi-trash-fill"></i> Hapus
-                                    </a>
+                                    </a> -->
                                 </td>
                             </tr>
                         <?php } ?>
@@ -101,6 +108,43 @@
         </div>
     </div>
 </div>
+
+<?php foreach ($suratmasuk as $data) { ?>
+    <div class="modal fade" id="disposisiModal" tabindex="-1" aria-labelledby="disposisiModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="disposisiModalLabel">Disposisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?= base_url('/surat/surat-masuk/disposisi/prosesdisposisi/' . $data->id); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="id_surat" value="<?= $data->id; ?>">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="">Nama Tujuan</label>
+                            <select name="tujuan_id" class="form-select" required>
+                                <option value="" disabled selected>-- Pilih User yang Dituju --</option>
+                                <?php foreach ($user as $u) { ?>
+                                    <option value="<?= $u->id ?>" <?= $u->id == $data->tujuan_personal ? 'selected' : ''; ?>><?= $u->nama_lengkap; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="catatan_disposisi">Catatan Disposisi Baru</label>
+                            <textarea class="form-control" id="catatan_disposisi" name="catatan_disposisi" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Pindahkan Disposisi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 
 <script src="<?= base_url('assets/dist/assets/extensions/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('assets/dist/assets/extensions/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class RegistrasiSuratMasukModel extends Model
 {
-    function getSuratMasuk()
+    function getSuratMasuk($id)
     {
         $query = $this->db->query('SELECT
         registrasisuratmasuk.*, 
@@ -17,7 +17,8 @@ class RegistrasiSuratMasukModel extends Model
         JOIN subsatker ON registrasisuratmasuk.tujuan_subsatker_id = subsatker.id
         JOIN user ON registrasisuratmasuk.tujuan_personal_id = user.id
         JOIN user AS u ON registrasisuratmasuk.user_register = u.id
-        ;');
+        WHERE registrasisuratmasuk.user_register = ?
+        ORDER BY registrasisuratmasuk.createdAt DESC', array($id));
         return $query->getResult();
     }
 

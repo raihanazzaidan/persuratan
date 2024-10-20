@@ -16,7 +16,6 @@ class KomentarDisposisiModel extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField  = 'createdAt';
-    protected $updatedField  = 'updatedAt';
 
     protected $validationRules = [
         'id' => 'required|max_length[36]',

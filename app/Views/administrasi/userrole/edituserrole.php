@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3><?= $title; ?></h3>
-                    <a href="<?= base_url('/administrasi/userrole'); ?>" class="btn btn-primary me-2">
+                    <a href="<?= base_url('/administrasi/role'); ?>" class="btn btn-primary me-2">
                         <i class="bi bi-arrow-left-circle"></i> Kembali
                     </a>
                 </div>
@@ -27,7 +27,7 @@
                 <h4 class="card-title">Edit User Role</h4>
             </div>
             <div class="card-body">
-                <form action="<?= base_url('/administrasi/userrole/edituserrole/prosesedituserrole/' . $data->usr_id); ?>" enctype="multipart/form-data" method="post">
+                <form action="<?= base_url('/administrasi/role/edituserrole/prosesedituserrole/' . $data->usr_id); ?>" enctype="multipart/form-data" method="post">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">

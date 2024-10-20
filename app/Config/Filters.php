@@ -90,7 +90,7 @@ class Filters extends BaseFilters
                 'except' => ['/beranda', '/administrasi/user', '/administrasi/user/adduser', '/administrasi/user/adduser/prosesadduser', '/administrasi/user/edituser/(:any)', '/administrasi/user/edituser/prosesedituser/(:any)', '/administrasi/user/hapususer/(:any)', '/administrasi/jenis-induk-subsatker', '/administrasi/grup-jabatan', '/administrasi/jabatan', '/administrasi/subsatker', '/administrasi/user-role', '/administrasi/user-role/adduserrole', '/administrasi/user-role/adduserrole/pilih-user', '/administrasi/user-role/adduserrole/hapus-pilihan-user', '/administrasi/user-role/adduserrole/prosesadduserrole', '/administrasi/hak-akses', '/surat/*']
             ],
             'filterPegawai' => [
-                'except' => ['/beranda', '/surat/surat-masuk', '/surat/history-naskah-keluar', '/surat/disposisi', '/surat/disposisi/detail/(:any)', '/surat/disposisi/penyelesaian/(:any)']
+                'except' => ['/beranda', '/surat/*']
             ],
         ],
     ];
