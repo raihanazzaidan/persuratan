@@ -7,7 +7,6 @@ $userLevel = $session->get('level');
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3><?= $title; ?></h3>
-                <a href='<?= base_url('/surat/surat-masuk'); ?>' class="btn btn-primary">Kembali</a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -53,7 +52,13 @@ $userLevel = $session->get('level');
                                 <td><?= date('l, d F Y', strtotime($disposisi->tanggal_disposisi)) ?></td>
                                 <td><?= $disposisi->nama_pengirim; ?></td>
                                 <td><?= $disposisi->hal; ?></td>
-                                <td><?= $disposisi->catatan_disposisi; ?></td>
+                                <td>
+                                    <?php if (!empty($disposisi->catatan_disposisi)): ?>
+                                        <?= $disposisi->catatan_disposisi; ?>
+                                    <?php else: ?>
+                                        (Tidak ada catatan)
+                                    <?php endif; ?>
+                                </td>
                                 <td> <?php
                                         if ($disposisi->status == 'Y') {
                                             echo ('Selesai');

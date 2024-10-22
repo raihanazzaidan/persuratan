@@ -75,7 +75,9 @@ $current_user = $session->get('id');
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <span class="text-muted">Tidak ada aksi</span>
+                                    <a href="<?= base_url('surat/surat-masuk/detail/' . $sm->id); ?>" class="btn btn-info btn-sm">
+                                        <i class="bi bi-eye"></i> Lihat Detail
+                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>

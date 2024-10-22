@@ -4,6 +4,7 @@ namespace App\Controllers\Surat;
 
 use App\Controllers\BaseController;
 use App\Models\Surat\RegistrasiSuratMasukModel;
+use App\Models\Surat\HistoryNaskahKeluarModel;
 use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -17,7 +18,7 @@ class RegistrasiSuratMasuk extends BaseController
     function getSuratMasuk()
     {
         $id = session()->id;
-        $SuratMasukModel = new RegistrasiSuratMasukModel(); 
+        $SuratMasukModel = new RegistrasiSuratMasukModel();
         $data['suratmasuk'] = $SuratMasukModel->getSuratMasuk($id);
         $data['jenisnaskah'] = $SuratMasukModel->getData_jenisnaskah();
         $data['sifatnaskah'] = $SuratMasukModel->getData_sifatnaskah();
@@ -86,11 +87,20 @@ class RegistrasiSuratMasuk extends BaseController
             'tujuan_subsatker_id' => $this->request->getPost('tujuan_subsatker_id'),
             'tujuan_personal_id' => $this->request->getPost('tujuan_personal_id'),
             'user_register' => $user_register,
-            'createdAt' => $createdAt,  // Menggunakan UTC time
+            'createdAt' => $createdAt,  
         ];
 
-        // Proses penyimpanan data
         if ($SuratMasukModel->addSuratMasuk($data)) {
+            $historyNaskahKeluarData = [
+                'id' => $uuid,
+                'naskah_id' => $data['id'],
+                'pengirim_id' => $user_register,
+                'status_naskah' => 'terkirim',
+                'status_dibaca' => 'belum',
+                'updatedAt' => $createdAt
+            ];
+            $historyNaskahKeluarModel = new HistoryNaskahKeluarModel();
+            $historyNaskahKeluarModel->addHistoryNaskahKeluar($historyNaskahKeluarData);
             $sessFlashdata = [
                 'sweetAlert' => [
                     'message' => 'Data berhasil ditambahkan',

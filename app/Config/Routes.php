@@ -109,6 +109,8 @@ $routes->get('/surat/registrasi-surat-masuk/hapussuratmasuk/(:any)', 'Surat\Regi
 
 // Registrasi Surat Masuk
 $routes->get('/surat/surat-masuk', 'Surat\SuratMasuk::getSuratMasuk');
+$routes->get('/surat/surat-masuk/detail/(:any)', 'Surat\SuratMasuk::detail/$1');
+$routes->post('/surat/surat-masuk/penyelesaian/(:any)', 'Surat\SuratMasuk::selesaikanSurat/$1'); 
 $routes->get('/surat/surat-masuk/disposisi/(:any)', 'Surat\Disposisi::disposisi/$1');
 $routes->post('/surat/surat-masuk/disposisi/prosesdisposisi/(:any)', 'Surat\Disposisi::prosesDisposisi/$1');
 $routes->post('surat/disposisi/pindah/(:any)', 'Surat\Disposisi::pindahDisposisi/$1');

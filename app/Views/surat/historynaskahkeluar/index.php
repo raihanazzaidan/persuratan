@@ -32,6 +32,7 @@
                             <th>Sifat Naskah</th>
                             <th>Nama Penerima</th>
                             <th>Nomor Naskah</th>
+                            <th>Status Dibaca</th>
                             <th>Status Surat</th>
                             <th>Tanggal Naskah</th>
                             <th>File Surat</th>
@@ -48,7 +49,8 @@
                                 <td><?= $surat->nama_sn; ?></td>
                                 <td><?= $surat->nama_penerima; ?></td>
                                 <td><?= $surat->nomor_naskah; ?></td>
-                                <td><?= $surat->status; ?></td>
+                                <td><?= $surat->status_dibaca; ?></td>
+                                <td><?= $surat->status_naskah; ?></td>
                                 <td><?= $surat->tanggal_naskah; ?></td>
                                 <td>
                                     <?php if ($surat->file_naskah) { ?>
@@ -59,7 +61,6 @@
                                         <span class="text-danger">Tidak ada file</span>
                                     <?php } ?>
                                 </td>
-                                <!-- Preview File Lampiran -->
                                 <td>
                                     <?php if ($surat->file_lampiran) { ?>
                                         <a href="<?= base_url('uploads/lampiran/' . $surat->file_lampiran); ?>" target="_blank" class="btn btn-info btn-sm">

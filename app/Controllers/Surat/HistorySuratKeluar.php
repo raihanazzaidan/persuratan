@@ -15,7 +15,6 @@ class HistorySuratKeluar extends BaseController
     function getSuratKeluar()
     {
         $id = session()->id;
-        // print_r($id);
         $NaskahKeluarModel = new HistoryNaskahKeluarModel();
         $data['naskahkeluar'] = $NaskahKeluarModel->getNaskahKeluar_id($id);
         $data['suratmasuk'] = $NaskahKeluarModel->getData_suratMasuk();
