@@ -42,6 +42,7 @@ class RegistrasiSuratMasukModel extends Model
         $query = $this->db->query('SELECT * FROM user WHERE user.status_user = "Y"');
         return $query->getResult();
     }
+    
     function addSuratMasuk($data)
     {
         $db = \Config\Database::connect();

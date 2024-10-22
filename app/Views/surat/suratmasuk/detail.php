@@ -101,12 +101,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <strong>Status</strong>
-                        <?php if ($suratmasuk->status == 'Selesai (Disposisi)'): ?>
-                            <p class="text-success"><i class="bi bi-check-circle-fill me-2"></i>Selesai (Disposisi)</p>
-                        <?php elseif ($suratmasuk->status == 'Disposisi'): ?>
-                            <p class="text-warning"><i class="bi bi-clock-fill me-2"></i>Sedang Diproses (Disposisi)</p>
+                        <?php if ($suratmasuk->status_naskah == 'Selesai'): ?>
+                            <p class="text-success"><i class="bi bi-check-circle-fill me-2"></i>Selesai</p>
+                        <?php elseif ($suratmasuk->status_naskah == 'Batal'): ?>
+                            <p class="text-warning"><i class="bi bi-x-circle-fill me-2"></i>Batal</p>
                         <?php else: ?>
-                            <p class="text-warning"><i class="bi bi-x-circle-fill me-2"></i>Belum Ditindak Lanjut</p>
+                            <p class="text-warning"><i class="bi bi-clock-fill me-2"></i>Belum Ditindak Lanjut</p>
                         <?php endif; ?>
                     </div>
                 </div>

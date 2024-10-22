@@ -49,17 +49,14 @@ class RegistrasiSuratMasuk extends BaseController
         $session = session();
         $user_register = $session->get('id');
 
-        // Mengambil file yang di-upload
         $fileNaskah = $this->request->getFile('file_naskah');
         $fileLampiran = $this->request->getFile('file_lampiran');
 
-        // Cek apakah file di-upload
         if ($fileNaskah && $fileNaskah->isValid()) {
-            // Pindahkan file ke folder tujuan dan ambil nama file
             $fileNaskahName = $fileNaskah->getRandomName();
             $fileNaskah->move('uploads/surat', $fileNaskahName);
         } else {
-            $fileNaskahName = null; // Jika tidak ada file yang di-upload
+            $fileNaskahName = null;
         }
 
         if ($fileLampiran && $fileLampiran->isValid()) {
@@ -69,7 +66,6 @@ class RegistrasiSuratMasuk extends BaseController
             $fileLampiranName = null;
         }
         $createdAt = gmdate("Y-m-d H:i:s", time() + 25200);
-        // Data yang akan disimpan
         $data = [
             'id' => $uuid,
             'nama_pengirim' => $this->request->getPost('nama_pengirim'),
@@ -137,43 +133,34 @@ class RegistrasiSuratMasuk extends BaseController
     {
         $SuratMasukModel = new RegistrasiSuratMasukModel();
 
-        // Mengambil file yang di-upload
         $fileNaskah = $this->request->getFile('file_naskah');
         $fileLampiran = $this->request->getFile('file_lampiran');
         $datalama = $SuratMasukModel->editSuratMasuk($id);
 
-        // Data file lama
         $fileNaskah_lama = $datalama[0]->file_naskah;
         $fileLampiran_lama = $datalama[0]->file_lampiran;
 
-        // Cek apakah file Naskah di-upload
         if ($fileNaskah && $fileNaskah->isValid()) {
-            // Jika ada file baru, hapus file lama dan simpan file baru
             if (file_exists('./uploads/surat/' . $fileNaskah_lama)) {
                 unlink('./uploads/surat/' . $fileNaskah_lama);
             }
             $fileNaskahName = $fileNaskah->getRandomName();
             $fileNaskah->move('uploads/surat', $fileNaskahName);
         } else {
-            // Jika tidak ada file baru, gunakan file lama
             $fileNaskahName = $fileNaskah_lama;
         }
 
-        // Cek apakah file Lampiran di-upload
         if ($fileLampiran && $fileLampiran->isValid()) {
-            // Jika ada file baru, hapus file lama dan simpan file baru
             if (file_exists('./uploads/lampiran/' . $fileLampiran_lama)) {
                 unlink('./uploads/lampiran/' . $fileLampiran_lama);
             }
             $fileLampiranName = $fileLampiran->getRandomName();
             $fileLampiran->move('uploads/lampiran', $fileLampiranName);
         } else {
-            // Jika tidak ada file baru, gunakan file lama
             $fileLampiranName = $fileLampiran_lama;
         }
 
         $updatedAt = gmdate("Y-m-d H:i:s", time() + 25200);
-        // Data yang akan disimpan
         $data = [
             'nama_pengirim' => $this->request->getPost('nama_pengirim'),
             'jabatan_pengirim' => $this->request->getPost('jabatan_pengirim'),
@@ -185,14 +172,13 @@ class RegistrasiSuratMasuk extends BaseController
             'tanggal_diterima' => $this->request->getPost('tanggal_diterima'),
             'hal' => $this->request->getPost('hal'),
             'ringkasan' => $this->request->getPost('ringkasan'),
-            'file_naskah' => $fileNaskahName, // Tetap gunakan nama file yang ada, baik file baru atau file lama
-            'file_lampiran' => $fileLampiranName, // Tetap gunakan nama file yang ada, baik file baru atau file lama
+            'file_naskah' => $fileNaskahName, 
+            'file_lampiran' => $fileLampiranName, 
             'tujuan_subsatker_id' => $this->request->getPost('tujuan_subsatker_id'),
             'tujuan_personal_id' => $this->request->getPost('tujuan_personal_id'),
             'updatedAt' => $updatedAt,
         ];
 
-        // Proses penyimpanan data
         if ($SuratMasukModel->updateSuratMasuk($id, $data)) {
             $sessFlashdata = [
                 'sweetAlert' => [
@@ -216,7 +202,6 @@ class RegistrasiSuratMasuk extends BaseController
     {
         $SuratMasukModel = new RegistrasiSuratMasukModel();
         $datalama = $SuratMasukModel->editSuratMasuk($id);
-        // print_r($datalama);
 
         $fileNaskah_lama = $datalama[0]->file_naskah;
         $fileLampiran_lama = $datalama[0]->file_lampiran;

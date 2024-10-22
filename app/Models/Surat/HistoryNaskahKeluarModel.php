@@ -20,18 +20,18 @@ class HistoryNaskahKeluarModel extends Model
         CASE
             WHEN hnm.id IS NOT NULL AND hnm.status_dibaca = "belum" THEN "Belum Dibaca"
             WHEN hnm.id IS NOT NULL AND hnm.status_dibaca = "dibaca" THEN "Sudah Dibaca"
-            WHEN hnm.id IS NOT NULL AND hnm.status_dibaca = "batal" THEN "Batal"
+            -- WHEN hnm.id IS NOT NULL AND hnm.status_dibaca = "batal" THEN "Batal"
             END as status_dibaca,
         CASE
             WHEN hnm.id IS NOT NULL AND hnm.status_naskah = "terkirim" THEN "Belum Ditindak lanjut"
-            WHEN hnm.id IS NOT NULL AND hnm.status_naskah = "Y" THEN "Selesai"
-            WHEN hnm.id IS NOT NULL AND hnm.status_naskah = "N" THEN "Batal"
+            WHEN hnm.id IS NOT NULL AND hnm.status_naskah = "selesai" THEN "Selesai"
+            -- WHEN hnm.id IS NOT NULL AND hnm.status_naskah = "batal" THEN "Batal"
         END as status_naskah,
         CASE
-        WHEN d.id IS NOT NULL AND d.status IS NULL THEN "Disposisi"
-        WHEN d.id IS NOT NULL AND d.status = "Y" THEN "Selesai (Disposisi)"
-        WHEN d.id IS NOT NULL AND d.status = "N" THEN "Batal (Disposisi)"
-        END as status
+            WHEN d.id IS NOT NULL AND d.status IS NULL THEN "Disposisi"
+            WHEN d.id IS NOT NULL AND d.status = "Y" THEN "Selesai (Disposisi)"
+            WHEN d.id IS NOT NULL AND d.status = "N" THEN "Batal (Disposisi)"
+        END as status_disposisi
         FROM registrasisuratmasuk AS sm
         JOIN jenisnaskah AS jn ON sm.jenis_naskah_id = jn.id
         JOIN sifatnaskah AS sn ON sm.sifat_naskah_id = sn.id
